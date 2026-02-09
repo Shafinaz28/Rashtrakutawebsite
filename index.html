@@ -39,7 +39,6 @@
     html{scroll-behavior:smooth}
     body{
       font-family:"Inter",sans-serif;
-      /* Reduced darkness so background images are more visible */
       background:
         radial-gradient(1200px 700px at 15% 10%, rgba(212,175,55,0.10), transparent 55%),
         radial-gradient(900px 600px at 85% 15%, rgba(46,119,255,0.10), transparent 55%),
@@ -68,36 +67,25 @@
       content:"";
       position:absolute;inset:-1px;
       pointer-events:none;
-
-      /* IMPORTANT:
-        - We reduce the dark gradient opacity
-        - We increase image opacity
-        - We use background-attachment: fixed so it "sticks" while scrolling
-      */
       background:
         linear-gradient(180deg, rgba(7,10,15,0.45) 0%, rgba(7,10,15,0.55) 100%),
         url("https://exampariksha.com/wp-content/uploads/2015/01/The-Rashtrakuta-dynasty-Kailash-Temple-Ellora.jpg");
-
       background-size:cover;
       background-position:center;
       background-repeat:no-repeat;
       background-attachment:fixed;
-
-      opacity:0.55;               /* increased visibility */
+      opacity:0.55;
       filter:grayscale(0.25) contrast(1.05) brightness(0.95);
-      mix-blend-mode:normal;       /* normal shows image best */
+      mix-blend-mode:normal;
     }
 
     .pillars-bg:after{
       content:"";
       position:absolute;inset:0;
       pointer-events:none;
-
-      /* Softer overlays (less dark) */
       background:
         radial-gradient(900px 420px at 50% 20%, rgba(212,175,55,0.14), transparent 60%),
         radial-gradient(1000px 600px at 50% 95%, rgba(0,0,0,0.22), transparent 55%);
-
       opacity:0.75;
     }
 
@@ -130,11 +118,11 @@
     .card-hover{transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease}
     .card-hover:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.55);border-color:rgba(212,175,55,0.28)}
 
-    /* ✅ Hero image: keep sticky/fixed while scrolling + reduce darkness */
+    /* ✅ Hero image: keep sticky/fixed while scrolling */
     .hero-bg{
-          background-size:cover;
+      background-size:cover;
       background-position:center;
-      background-attachment:fixed; /* sticky */
+      background-attachment:fixed;
       position:relative;
     }
     @media (max-width:768px){
@@ -170,6 +158,11 @@
     @media (max-width:768px){
       .section-padding{padding:3.25rem 0}
     }
+
+    /* ✅ iOS safe area polish (optional) */
+    @supports (padding: max(0px)) {
+      nav { padding-top: env(safe-area-inset-top); }
+    }
   </style>
 </head>
 
@@ -197,9 +190,11 @@
       </div>
     </div>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu (Improved: backdrop + panel) -->
     <div class="md:hidden hidden" id="mobile-menu">
-      <div class="mx-auto container px-4 pb-4">
+      <div class="fixed inset-0 bg-black/50 z-40" id="menu-backdrop"></div>
+
+      <div class="relative z-50 mx-auto container px-4 pb-4 pt-2">
         <div class="glass-dark rounded-2xl p-4 space-y-2">
           <a href="#hero" class="block py-2 text-t1 hover:text-gold transition-colors">Home</a>
           <a href="#about" class="block py-2 text-t1 hover:text-gold transition-colors">About</a>
@@ -212,30 +207,30 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pillars-bg noise">
+  <!-- HERO (✅ Mobile responsive fixed: padding for navbar + 100svh) -->
+  <section id="hero" class="hero-bg flex items-center justify-center relative overflow-hidden pillars-bg noise pt-24 md:pt-0 min-h-[100svh]">
     <div class="container mx-auto px-4 text-center relative z-10">
       <div class="animate-on-scroll">
-        <h1 class="text-5xl md:text-7xl font-playfair font-bold text-t0 mb-6 leading-tight">
+        <h1 class="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold text-t0 mb-5 leading-[1.12] md:leading-tight">
           Elevate Your Life with
-          <span class="gradient-text block">Signature Living Spaces</span>
+          <span class="gradient-text block mt-2">Signature Living Spaces</span>
         </h1>
 
-        <p class="text-lg md:text-2xl text-t1 mb-10 max-w-3xl mx-auto font-inter">
+        <p class="text-base sm:text-lg md:text-2xl text-t1 mb-8 md:mb-10 max-w-3xl mx-auto font-inter px-1">
           From premium villa plots to gated communities, Rastrakuta redefines the
           way you live, invest, and grow in Bangalore’s most promising locations.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#projects" class="shimmer-line inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 shadow-glow">
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-md sm:max-w-none mx-auto">
+          <a href="#projects" class="shimmer-line w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-7 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 shadow-glow">
             Explore Projects <i class="fa-solid fa-arrow-right ml-2"></i>
           </a>
-          <a href="#contact" class="inline-flex items-center justify-center glass-dark text-t0 px-8 py-4 rounded-xl font-semibold text-lg hover:border-gold/40 transition-all duration-300">
+          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center glass-dark text-t0 px-7 py-4 rounded-xl font-semibold text-base sm:text-lg hover:border-gold/40 transition-all duration-300">
             Enquire Now <i class="fa-regular fa-message ml-2"></i>
           </a>
         </div>
 
-        <div class="mt-12 flex justify-center gap-6 text-t2 flex-wrap">
+        <div class="mt-10 sm:mt-12 flex justify-center gap-4 sm:gap-6 text-t2 flex-wrap">
           <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i><span class="text-sm">Clear Titles</span></div>
           <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold"></i><span class="text-sm">Trusted Process</span></div>
           <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-gold"></i><span class="text-sm">Prime Locations</span></div>
@@ -526,154 +521,135 @@
   </section>
 
   <!-- CONTACT -->
- <!-- CONTACT SECTION -->
-<section id="contact" class="section-padding relative">
-  <div class="container mx-auto px-4">
+  <section id="contact" class="section-padding relative">
+    <div class="container mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-10 items-stretch">
+        <div class="animate-on-scroll flex flex-col">
+          <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0">
+            Let’s Build Your <span class="gradient-text">Next Investment</span>
+          </h2>
+          <p class="text-t1 mt-4 max-w-xl">
+            Share your requirement and we’ll send you available options, location insights,
+            and a documentation checklist.
+          </p>
 
-    <!-- Top Grid -->
-    <div class="grid lg:grid-cols-2 gap-10 items-stretch">
-
-      <!-- LEFT: CONTACT INFO -->
-      <div class="animate-on-scroll flex flex-col">
-        <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0">
-          Let’s Build Your <span class="gradient-text">Next Investment</span>
-        </h2>
-        <p class="text-t1 mt-4 max-w-xl">
-          Share your requirement and we’ll send you available options, location insights,
-          and a documentation checklist.
-        </p>
-
-        <div class="mt-8 space-y-4 flex-1 flex flex-col">
-          <!-- Phone -->
-          <div class="glass-dark rounded-2xl p-5">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
-                <i class="fa-solid fa-phone text-gold"></i>
-              </div>
-              <div>
-                <div class="text-t0 font-semibold">Phone</div>
-                <div class="text-t2 text-sm">+91 82173 11305</div>
+          <div class="mt-8 space-y-4 flex-1 flex flex-col">
+            <div class="glass-dark rounded-2xl p-5">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
+                  <i class="fa-solid fa-phone text-gold"></i>
+                </div>
+                <div>
+                  <div class="text-t0 font-semibold">Phone</div>
+                  <div class="text-t2 text-sm">+91 82173 11305</div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Email -->
-          <div class="glass-dark rounded-2xl p-5">
-            <div class="flex items-center gap-3">
-              <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
-                <i class="fa-solid fa-envelope text-gold"></i>
-              </div>
-              <div>
-                <div class="text-t0 font-semibold">Email</div>
-                <div class="text-t2 text-sm">rastrakutainfra@gmail.com</div>
+            <div class="glass-dark rounded-2xl p-5">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
+                  <i class="fa-solid fa-envelope text-gold"></i>
+                </div>
+                <div>
+                  <div class="text-t0 font-semibold">Email</div>
+                  <div class="text-t2 text-sm">rastrakutainfra@gmail.com</div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Address -->
-          <div class="glass-dark rounded-2xl p-5">
-            <div class="flex items-start gap-3">
-              <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center mt-0.5">
-                <i class="fa-solid fa-location-dot text-gold"></i>
-              </div>
-              <div>
-                <div class="text-t0 font-semibold">Address</div>
-                <div class="text-t2 text-sm">
-                  #14, 1st floor, 6A cross road, Talacauvery layout,
-                  Amruthalli Road, Sahakara Nagar post,
-                  Bengaluru – 560092
+            <div class="glass-dark rounded-2xl p-5">
+              <div class="flex items-start gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center mt-0.5">
+                  <i class="fa-solid fa-location-dot text-gold"></i>
+                </div>
+                <div>
+                  <div class="text-t0 font-semibold">Address</div>
+                  <div class="text-t2 text-sm">
+                    #14, 1st floor, 6A cross road, Talacauvery layout,
+                    Amruthalli Road, Sahakara Nagar post,
+                    Bengaluru – 560092
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div class="animate-on-scroll">
+          <div class="marble rounded-2xl shadow-soft p-7 relative overflow-hidden h-full flex flex-col">
+            <div class="absolute inset-0 noise"></div>
+
+            <div class="relative z-10 flex flex-col h-full">
+              <h3 class="text-2xl font-playfair font-bold text-t0">Enquiry Form</h3>
+              <p class="text-t2 mt-2">We’ll call you back within 24 hours.</p>
+
+              <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm">
+                <div>
+                  <label class="text-t2 text-sm">Full Name</label>
+                  <input type="text" required
+                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
+                    placeholder="Your name" />
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-t2 text-sm">Phone</label>
+                    <input type="tel" required
+                      class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
+                      placeholder="+91 XXXXX XXXXX" />
+                  </div>
+                  <div>
+                    <label class="text-t2 text-sm">Email</label>
+                    <input type="email"
+                      class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
+                      placeholder="name@email.com" />
+                  </div>
+                </div>
+
+                <div>
+                  <label class="text-t2 text-sm">Requirement</label>
+                  <select
+                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3">
+                    <option>Villa Plot</option>
+                    <option>Residential Layout Plot</option>
+                    <option>Investment Options</option>
+                    <option>Site Visit</option>
+                  </select>
+                </div>
+
+                <button type="submit"
+                  class="mt-auto w-full shimmer-line bg-gold hover:bg-gold2 text-ink px-6 py-4 rounded-xl font-semibold text-lg transition-all shadow-glow">
+                  Submit Enquiry <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+
+                <p class="text-[12px] text-t2 text-center mt-3">
+                  By submitting, you agree to be contacted by Rastrakuta Infra Developers Pvt Ltd.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- RIGHT: ENQUIRY FORM -->
-      <div class="animate-on-scroll">
-        <div class="marble rounded-2xl shadow-soft p-7 relative overflow-hidden h-full flex flex-col">
-          <div class="absolute inset-0 noise"></div>
-
-          <div class="relative z-10 flex flex-col h-full">
-            <h3 class="text-2xl font-playfair font-bold text-t0">Enquiry Form</h3>
-            <p class="text-t2 mt-2">We’ll call you back within 24 hours.</p>
-
-            <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm">
-              <div>
-                <label class="text-t2 text-sm">Full Name</label>
-                <input type="text" required
-                  class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                  placeholder="Your name" />
-              </div>
-
-              <div class="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label class="text-t2 text-sm">Phone</label>
-                  <input type="tel" required
-                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                    placeholder="+91 XXXXX XXXXX" />
-                </div>
-                <div>
-                  <label class="text-t2 text-sm">Email</label>
-                  <input type="email"
-                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                    placeholder="name@email.com" />
-                </div>
-              </div>
-
-              <div>
-                <label class="text-t2 text-sm">Requirement</label>
-                <select
-                  class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3">
-                  <option>Villa Plot</option>
-                  <option>Residential Layout Plot</option>
-                  <option>Investment Options</option>
-                  <option>Site Visit</option>
-                </select>
-              </div>
-
-              <!-- <div>
-                <label class="text-t2 text-sm">Message</label>
-                <textarea rows="4"
-                  class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                  placeholder="Preferred location, budget range, plot size..."></textarea>
-              </div> -->
-
-              <button type="submit"
-                class="mt-auto w-full shimmer-line bg-gold hover:bg-gold2 text-ink px-6 py-4 rounded-xl font-semibold text-lg transition-all shadow-glow">
-                Submit Enquiry <i class="fa-solid fa-arrow-right ml-2"></i>
-              </button>
-
-              <p class="text-[12px] text-t2 text-center mt-3">
-                By submitting, you agree to be contacted by Rastrakuta Infra Developers Pvt Ltd.
-              </p>
-            </form>
+      <div class="mt-12 animate-on-scroll">
+        <div class="glass-dark rounded-2xl overflow-hidden shadow-soft">
+          <div class="px-6 py-4 text-t0 font-semibold flex items-center gap-2">
+            <i class="fa-solid fa-map-location-dot text-gold"></i> Google Map Location
+          </div>
+          <div class="w-full h-[320px] md:h-[380px]">
+            <iframe
+              class="w-full h-full"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=%2314%2C%201st%20floor%2C%206A%20cross%20road%2C%20Talacauvery%20layout%2C%20Amruthalli%20Road%2C%20Sahakara%20Nagar%20post%2C%20Bengaluru%20560092&output=embed">
+            </iframe>
           </div>
         </div>
       </div>
 
     </div>
-
-    <!-- ✅ FULL WIDTH MAP (BOTTOM) -->
-    <div class="mt-12 animate-on-scroll">
-      <div class="glass-dark rounded-2xl overflow-hidden shadow-soft">
-        <div class="px-6 py-4 text-t0 font-semibold flex items-center gap-2">
-          <i class="fa-solid fa-map-location-dot text-gold"></i> Google Map Location
-        </div>
-        <div class="w-full h-[320px] md:h-[380px]">
-          <iframe
-            class="w-full h-full"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=%2314%2C%201st%20floor%2C%206A%20cross%20road%2C%20Talacauvery%20layout%2C%20Amruthalli%20Road%2C%20Sahakara%20Nagar%20post%2C%20Bengaluru%20560092&output=embed">
-          </iframe>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
+  </section>
 
   <!-- FOOTER -->
   <footer class="bg-[#06080D] text-t1 py-12 border-t border-white/10">
@@ -727,7 +703,7 @@
             </li>
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-location-dot text-gold mt-1"></i>
-              <div><h4 class="font-semibold text-t0">#14, 1st floor, 6A cross road, Talacauvery layout, Amruthalli Road, Sahakara Nagar post, Bengaluru 560092</h4></div>
+              <div><h4 class="text-sm font-semibold text-t0">#14, 1st floor, 6A cross road, Talacauvery layout, Amruthalli Road, Sahakara Nagar post, Bengaluru 560092</h4></div>
             </li>
           </ul>
         </div>
@@ -740,6 +716,7 @@
   </footer>
 
   <script>
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         e.preventDefault();
@@ -748,13 +725,22 @@
       });
     });
 
+    // Mobile menu open/close + backdrop
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
+    const backdrop = document.getElementById("menu-backdrop");
+
     mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+
+    if (backdrop) {
+      backdrop.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+    }
+
     document.querySelectorAll("#mobile-menu a").forEach((link) =>
       link.addEventListener("click", () => mobileMenu.classList.add("hidden"))
     );
 
+    // Navbar style on scroll
     const navbar = document.getElementById("navbar");
     function setNav() {
       if (window.scrollY > 30) {
@@ -771,12 +757,14 @@
     window.addEventListener("scroll", setNav);
     setNav();
 
+    // Animate on scroll
     const observerOptions = { threshold: 0.12, rootMargin: "0px 0px -50px 0px" };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add("animate"); });
     }, observerOptions);
     document.querySelectorAll(".animate-on-scroll").forEach((el) => observer.observe(el));
 
+    // Scroll progress bar
     const scrollProgress = document.createElement("div");
     scrollProgress.className = "fixed top-0 left-0 h-[2px] bg-gold z-50 transition-all duration-200";
     scrollProgress.style.width = "0%";
@@ -788,6 +776,7 @@
       scrollProgress.style.opacity = window.scrollY > 40 ? "1" : "0";
     });
 
+    // Back to top
     const backToTop = document.createElement("button");
     backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
     backToTop.className = "fixed bottom-8 right-8 bg-gold hover:bg-gold2 text-ink w-12 h-12 rounded-full shadow-glow transition-all duration-300 opacity-0 translate-y-8 z-50";
@@ -800,6 +789,7 @@
 
     backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
+    // Lead form
     const leadForm = document.getElementById("leadForm");
     if (leadForm) {
       leadForm.addEventListener("submit", function (e) {
