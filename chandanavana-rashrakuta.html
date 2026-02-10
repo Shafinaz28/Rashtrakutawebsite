@@ -57,13 +57,17 @@
     .hl-icon{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 14px}
     .hl-card h4{font-size:15px;font-weight:600;margin-bottom:4px}
     .hl-card p{font-size:12px;color:rgba(255,255,255,.85)}
+
+    /* NAV hide on scroll */
+    #navbar{transition:transform .28s ease, opacity .28s ease}
+    #navbar.nav-hidden{transform:translateY(-110%);opacity:0}
   </style>
 </head>
 
 <body>
 
   <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 " id="navbar">
+  <nav class="fixed top-0 left-0 right-0 z-50" id="navbar">
     <div class="mx-auto container px-4 py-4">
       <div class="flex items-center justify-center md:justify-between">
         <a href="index.html" class="flex items-center justify-center md:justify-start">
@@ -159,7 +163,7 @@
             </div>
 
             <div class="flex items-start gap-3 p-4 bg-white rounded-xl border border-[#2E7D32]/20 shadow-sm">
-              <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/25 flex items-center justify-center text-[#2E7D32]">
+              <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/25 flex items-center justify-content-center text-[#2E7D32]">
                 <i class="fa-solid fa-percent"></i>
               </div>
               <div>
@@ -198,7 +202,7 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS (no borders + tight spacing) -->
+  <!-- HOW IT WORKS -->
   <section id="how-it-works" class="py-16 bg-[#F6FFF7]">
     <div class="container mx-auto px-4">
       <div class="text-center">
@@ -386,7 +390,7 @@
     <div class="container mx-auto px-4">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-cinzel text-white">Project Highlights</h2>
-        <p class="mt-2 text-white/80 text-sm">11 thoughtfully designed community & nature experiences.</p>
+        <p class="mt-2 text-white/80 text-sm">12 thoughtfully designed community & nature experiences.</p>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -401,6 +405,9 @@
         <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-people-group"></i></div><h4>Shrishti Angana</h4><p>Amphitheatre Lawn</p></div>
         <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-house-chimney"></i></div><h4>Mannina Mane</h4><p>Earthen Farmhouses</p></div>
         <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-spa"></i></div><h4>Bamboo Pavilion</h4><p>Yoga & Reflection Hall</p></div>
+
+        <!-- NEW (12th) -->
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-water"></i></div><h4>Jala Kuteera</h4><p>Waterbody & Calm Deck</p></div>
       </div>
     </div>
   </section>
@@ -667,7 +674,7 @@
   <!-- IMAGE LIGHTBOX -->
   <div id="imgModal" class="hidden fixed inset-0 z-[99]">
     <div class="absolute inset-0 bg-black/70" data-img-backdrop></div>
-    <div class="relative w-full h-full flex items-center justify-center p-3 sm:p-4">
+    <div class="relative w-full h-full flex items-center justify-center p-3 sm:p-4" data-img-wrap>
       <div id="imgModalCard" class="relative bg-white rounded-2xl shadow-soft w-[92vw] sm:w-[90vw] md:w-full max-w-5xl">
         <button type="button" data-img-close
           class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/90 flex items-center justify-center text-xl text-gray-700 hover:text-green-700">
@@ -745,12 +752,12 @@
       if(pageField) pageField.value=window.location.href;
     });
 
-    // Image lightbox (close on outside click)
+    // Image lightbox (close when clicking ANY side/outside)
     const imgModal=document.getElementById("imgModal");
     const imgModalTarget=document.getElementById("imgModalTarget");
-    const imgModalCard=document.getElementById("imgModalCard");
-    const imgBackdrop=document.querySelector("[data-img-backdrop]");
+    const imgWrap=document.querySelector("[data-img-wrap]");
     const imgCloseBtn=document.querySelector("[data-img-close]");
+    const imgModalCard=document.getElementById("imgModalCard");
 
     function openImgModal(src){
       imgModalTarget.src=src;
@@ -762,17 +769,61 @@
       imgModalTarget.src="";
       document.body.classList.remove("no-scroll");
     }
+
     document.querySelectorAll('img[data-lightbox="true"]').forEach(img=>{
       img.addEventListener("click",()=>openImgModal(img.src));
     });
-    imgBackdrop?.addEventListener("click",closeImgModal);
-    imgCloseBtn?.addEventListener("click",closeImgModal);
-    imgModalCard?.addEventListener("click",(e)=>e.stopPropagation());
+
+    // Close if click anywhere except the image/card/close button
+    imgWrap?.addEventListener("click",(e)=>{
+      const clickedInsideCard = imgModalCard?.contains(e.target);
+      const clickedOnImage = (e.target === imgModalTarget);
+      const clickedOnClose = imgCloseBtn?.contains(e.target);
+      if(!clickedInsideCard || (!clickedOnImage && !clickedOnClose && !clickedInsideCard)){
+        closeImgModal();
+      }
+    });
+
+    // Also close if click the dark backdrop
+    document.querySelector("[data-img-backdrop]")?.addEventListener("click", closeImgModal);
+    imgCloseBtn?.addEventListener("click", closeImgModal);
 
     // ESC close image modal
     document.addEventListener("keydown",(e)=>{
       if(e.key==="Escape" && !imgModal.classList.contains("hidden")) closeImgModal();
     });
+
+    // NAVBAR hide on scroll down, show on scroll up
+    const navbar = document.getElementById("navbar");
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    function onScroll(){
+      const y = window.scrollY;
+
+      // small threshold to avoid flicker
+      const delta = y - lastY;
+
+      if(y < 20){
+        navbar?.classList.remove("nav-hidden");
+      } else if(delta > 6){
+        // scrolling down
+        navbar?.classList.add("nav-hidden");
+      } else if(delta < -6){
+        // scrolling up
+        navbar?.classList.remove("nav-hidden");
+      }
+
+      lastY = y;
+      ticking = false;
+    }
+
+    window.addEventListener("scroll", ()=>{
+      if(!ticking){
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive:true });
   </script>
 </body>
 </html>
