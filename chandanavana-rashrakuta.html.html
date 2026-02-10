@@ -7,6 +7,7 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
@@ -890,64 +891,89 @@
 </div>
 
 
-  <script>
-    // Mobile menu toggle
-    const mobileBtn = document.getElementById("mobileBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
-    mobileBtn?.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
+<script>
+  // =========================
+  // Mobile menu toggle (NOTE: your HTML has id="mobile-menu" not "mobileMenu")
+  // =========================
+  const mobileBtn = document.getElementById("mobileBtn");
+  const mobileMenu = document.getElementById("mobile-menu"); // ✅ fixed id
+  mobileBtn?.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
 
-    // Modal helpers
-    function openModal(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.classList.remove("hidden");
-      document.body.classList.add("no-scroll");
-    }
-    function closeModal(id){
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.classList.add("hidden");
-      document.body.classList.remove("no-scroll");
-    }
+  // =========================
+  // Modal helpers
+  // =========================
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove("hidden");
+    document.body.classList.add("no-scroll");
+  }
 
-    document.querySelectorAll("[data-close-modal]").forEach(btn=>{
-      btn.addEventListener("click", ()=> closeModal(btn.getAttribute("data-close-modal")));
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("hidden");
+    document.body.classList.remove("no-scroll");
+  }
+
+  document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      closeModal(btn.getAttribute("data-close-modal"))
+    );
+  });
+
+  // =========================
+  // Open modal buttons + set hidden config/area
+  // =========================
+  const cfgField = document.getElementById("cfgField");
+  const areaField = document.getElementById("areaField");
+
+  document.querySelectorAll('[data-open-modal="leadModal"]').forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cfg = btn.getAttribute("data-config") || "";
+      const area = btn.getAttribute("data-area") || "";
+      if (cfgField) cfgField.value = cfg;
+      if (areaField) areaField.value = area;
+
+      openModal("leadModal");
+      mobileMenu?.classList.add("hidden");
     });
+  });
 
-    // Open modal buttons
-    const cfgField = document.getElementById("cfgField");
-    const areaField = document.getElementById("areaField");
+  // ESC close lead modal
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal("leadModal");
+  });
 
-    document.querySelectorAll('[data-open-modal="leadModal"]').forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const cfg = btn.getAttribute("data-config") || "";
-        const area = btn.getAttribute("data-area") || "";
-        if (cfgField) cfgField.value = cfg;
-        if (areaField) areaField.value = area;
-        openModal("leadModal");
-        mobileMenu?.classList.add("hidden");
-      });
-    });
 
-    // ESC close
-    document.addEventListener("keydown", (e)=>{
-      if(e.key === "Escape") closeModal("leadModal");
-    });
+const leadForm = document.getElementById("leadForm");
+const SHEET_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbz_fokU1o5TJaczn8Z4Ss_IjlNDcI7qXrER8RE4KlveQ6xlow8IUhO6J9rzunCgI41u/exec"; // must end with /exec
 
-    // Submit (simple demo). Replace with Google Sheet POST if needed.
-    const leadForm = document.getElementById("leadForm");
-    leadForm?.addEventListener("submit", function(e){
-      e.preventDefault();
-      alert("✅ Thank you! Our team will contact you soon.");
-      this.reset();
-      closeModal("leadModal");
-    });
-  </script>
-  <script>
+leadForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const fd = new FormData(this);
+  fd.set("configuration", document.getElementById("cfgField")?.value || "");
+  fd.set("area", document.getElementById("areaField")?.value || "");
+  fd.set("page", window.location.href);
+
+  await fetch(SHEET_WEBAPP_URL, {
+    method: "POST",
+    body: fd,
+    mode: "no-cors"
+  });
+
+  alert("✅ Submitted!");
+  this.reset();
+});
+
+  // =========================
+  // IMAGE LIGHTBOX
+  // =========================
   const imgModal = document.getElementById("imgModal");
   const imgModalTarget = document.getElementById("imgModalTarget");
 
-  document.querySelectorAll('img[data-lightbox="true"]').forEach(img => {
+  document.querySelectorAll('img[data-lightbox="true"]').forEach((img) => {
     img.addEventListener("click", () => {
       imgModalTarget.src = img.src;
       imgModal.classList.remove("hidden");
@@ -955,17 +981,19 @@
     });
   });
 
-  function closeImgModal(){
+  function closeImgModal() {
     imgModal.classList.add("hidden");
     imgModalTarget.src = "";
     document.body.style.overflow = "";
   }
+  window.closeImgModal = closeImgModal;
 
-  // ESC key close
-  document.addEventListener("keydown", e => {
-    if(e.key === "Escape") closeImgModal();
+  // ESC key close image modal
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeImgModal();
   });
 </script>
+
 
 </body>
 </html>
