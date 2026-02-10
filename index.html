@@ -23,9 +23,7 @@
             soft: "0 18px 50px rgba(0,0,0,0.55)",
             glow: "0 0 0 1px rgba(212,175,55,0.25), 0 18px 60px rgba(212,175,55,0.08)"
           },
-          animation: {
-            shimmer: "shimmer 2.6s linear infinite"
-          },
+          animation: { shimmer: "shimmer 2.6s linear infinite" },
           keyframes: {
             shimmer: { "0%": { transform: "translateX(-40%)" }, "100%": { transform: "translateX(140%)" } }
           }
@@ -38,7 +36,7 @@
     *{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{
-      font-family:"Inter",sans-serif;
+      font-family: "Inter", sans-serif;
       background:
         radial-gradient(1200px 700px at 15% 10%, rgba(212,175,55,0.10), transparent 55%),
         radial-gradient(900px 600px at 85% 15%, rgba(46,119,255,0.10), transparent 55%),
@@ -46,6 +44,7 @@
       color:rgba(255,255,255,0.90);
       line-height:1.6;
       overflow-x:hidden;
+      font-weight:400;
     }
 
     .container{width:92%!important;max-width:1280px!important}
@@ -61,7 +60,6 @@
       opacity:0.30;
     }
 
-    /* ✅ Ellora texture + make it more visible + sticky */
     .pillars-bg{position:relative;overflow:hidden}
     .pillars-bg:before{
       content:"";
@@ -89,7 +87,6 @@
       opacity:0.75;
     }
 
-    /* Mobile fix: background-attachment fixed is buggy on many phones */
     @media (max-width:768px){
       .pillars-bg:before{ background-attachment:scroll; }
     }
@@ -118,16 +115,8 @@
     .card-hover{transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease}
     .card-hover:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.55);border-color:rgba(212,175,55,0.28)}
 
-    /* ✅ Hero image: keep sticky/fixed while scrolling */
-    .hero-bg{
-      background-size:cover;
-      background-position:center;
-      background-attachment:fixed;
-      position:relative;
-    }
-    @media (max-width:768px){
-      .hero-bg{background-attachment:scroll}
-    }
+    .hero-bg{background-size:cover;background-position:center;background-attachment:fixed;position:relative;}
+    @media (max-width:768px){ .hero-bg{background-attachment:scroll} }
 
     .shimmer-line{position:relative;overflow:hidden}
     .shimmer-line:after{
@@ -139,44 +128,46 @@
       animation:shimmer 2.6s linear infinite;
     }
 
-    .section-padding{padding:5rem 0}
+    .section-padding{padding:4.25rem 0}
 
     .cta-title{
       font-family:"Cinzel",serif;
-      letter-spacing:0.10em;
+      letter-spacing:0.08em;
       text-transform:uppercase;
-      font-weight:700;
+      font-weight:600;
       text-shadow:0 10px 40px rgba(0,0,0,0.45);
     }
     .cta-subtitle{
       font-family:"Inter",sans-serif;
       font-weight:300;
       letter-spacing:0.02em;
-      font-size:1.05rem;
+      font-size:1rem;
     }
 
-    @media (max-width:768px){
-      .section-padding{padding:3.25rem 0}
-    }
+    @media (max-width:768px){ .section-padding{padding:3rem 0} }
 
-    /* ✅ iOS safe area polish (optional) */
-    @supports (padding: max(0px)) {
-      nav { padding-top: env(safe-area-inset-top); }
-    }
+    h1,h2,h3,h4{font-weight:600}
+    p,span,a,li,label,option,select,input,button{font-weight:400}
+    @supports (padding: max(0px)) { nav { padding-top: env(safe-area-inset-top); } }
   </style>
 </head>
 
 <body>
   <!-- NAV -->
   <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
-    <div class="mx-auto container px-4 py-4">
+    <div class="mx-auto container px-4 py-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-3">
-          <div class="h-12 w-auto rounded-sm flex items-center justify-center">
-            <img class="h-full" src="./images/footer logo.png" alt="Rastrakuta" />
+          <div class="flex items-center">
+            <img
+              src="./images/Rastrakuta Logo_20260205_095728_0000.png"
+              alt="Rastrakuta"
+              class="h-16 w-56 md:h-20 md:w-72 object-contain"
+            />
           </div>
         </div>
-        <div class="hidden md:flex items-center space-x-8 text-sm">
+
+        <div class="hidden md:flex items-center space-x-7 text-[13px]">
           <a href="#hero" class="text-t1 hover:text-gold transition-colors">Home</a>
           <a href="#about" class="text-t1 hover:text-gold transition-colors">About</a>
           <a href="#why-choose" class="text-t1 hover:text-gold transition-colors">Why Choose</a>
@@ -184,18 +175,19 @@
           <a href="#testimonials" class="text-t1 hover:text-gold transition-colors">Testimonials</a>
           <a href="#contact" class="text-t1 hover:text-gold transition-colors">Contact</a>
         </div>
+
         <button class="md:hidden text-t0 text-xl" id="mobile-menu-btn" aria-label="Open menu">
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Menu (Improved: backdrop + panel) -->
+    <!-- Mobile Menu -->
     <div class="md:hidden hidden" id="mobile-menu">
       <div class="fixed inset-0 bg-black/50 z-40" id="menu-backdrop"></div>
 
       <div class="relative z-50 mx-auto container px-4 pb-4 pt-2">
-        <div class="glass-dark rounded-2xl p-4 space-y-2">
+        <div class="glass-dark rounded-2xl p-4 space-y-2 text-sm">
           <a href="#hero" class="block py-2 text-t1 hover:text-gold transition-colors">Home</a>
           <a href="#about" class="block py-2 text-t1 hover:text-gold transition-colors">About</a>
           <a href="#why-choose" class="block py-2 text-t1 hover:text-gold transition-colors">Why Choose</a>
@@ -207,33 +199,33 @@
     </div>
   </nav>
 
-  <!-- HERO (✅ Mobile responsive fixed: padding for navbar + 100svh) -->
+  <!-- HERO -->
   <section id="hero" class="hero-bg flex items-center justify-center relative overflow-hidden pillars-bg noise pt-24 md:pt-0 min-h-[100svh]">
     <div class="container mx-auto px-4 text-center relative z-10">
       <div class="animate-on-scroll">
-        <h1 class="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold text-t0 mb-5 leading-[1.12] md:leading-tight">
+        <h1 class="text-3xl sm:text-4xl md:text-6xl font-playfair font-semibold text-t0 mb-4 leading-[1.12] md:leading-tight">
           Elevate Your Life with
           <span class="gradient-text block mt-2">Signature Living Spaces</span>
         </h1>
 
-        <p class="text-base sm:text-lg md:text-2xl text-t1 mb-8 md:mb-10 max-w-3xl mx-auto font-inter px-1">
+        <p class="text-sm sm:text-base md:text-xl text-t1 mb-7 md:mb-9 max-w-3xl mx-auto font-inter px-1">
           From premium villa plots to gated communities, Rastrakuta redefines the
           way you live, invest, and grow in Bangalore’s most promising locations.
         </p>
 
         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-md sm:max-w-none mx-auto">
-          <a href="#projects" class="shimmer-line w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-7 py-4 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 shadow-glow">
+          <a href="#projects" class="shimmer-line w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base transition-all duration-300 shadow-glow">
             Explore Projects <i class="fa-solid fa-arrow-right ml-2"></i>
           </a>
-          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center glass-dark text-t0 px-7 py-4 rounded-xl font-semibold text-base sm:text-lg hover:border-gold/40 transition-all duration-300">
+          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center glass-dark text-t0 px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base hover:border-gold/40 transition-all duration-300">
             Enquire Now <i class="fa-regular fa-message ml-2"></i>
           </a>
         </div>
 
-        <div class="mt-10 sm:mt-12 flex justify-center gap-4 sm:gap-6 text-t2 flex-wrap">
-          <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i><span class="text-sm">Clear Titles</span></div>
-          <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold"></i><span class="text-sm">Trusted Process</span></div>
-          <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-gold"></i><span class="text-sm">Prime Locations</span></div>
+        <div class="mt-9 sm:mt-10 flex justify-center gap-4 sm:gap-6 text-t2 flex-wrap text-sm">
+          <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i><span>Clear Titles</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold"></i><span>Trusted Process</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-gold"></i><span>Prime Locations</span></div>
         </div>
       </div>
     </div>
@@ -245,20 +237,20 @@
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="animate-on-scroll">
           <div class="relative rounded-2xl overflow-hidden marble shadow-soft">
-            <img src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&fit=crop" alt="About Rastrakuta" class="w-full h-[420px] object-cover opacity-90" />
+            <img src="images/aboutimag.jpg" alt="About Rastrakuta" class="w-full h-[420px] object-cover opacity-90" />
             <div class="absolute inset-0 noise"></div>
             <div class="absolute bottom-4 left-4 right-4 glass-dark rounded-xl p-4">
-              <div class="text-t0 font-playfair text-xl">Built for Legacy</div>
+              <div class="text-t0 font-playfair text-lg font-medium">Built for Legacy</div>
               <div class="text-t2 text-sm">Premium developments with a design-first mindset and transparent documentation.</div>
             </div>
           </div>
         </div>
 
         <div class="animate-on-scroll">
-          <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0 mb-6">
+          <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-5">
             About <span class="gradient-text">Rastrakuta</span>
           </h2>
-          <p class="text-t1 text-lg mb-6 font-inter">
+          <p class="text-t1 text-base mb-6 font-inter">
             With a legacy of architectural excellence, Rastrakuta Infra Developers focuses on
             premium plotting and future-ready communities—crafted with quality, compliance, and
             long-term value in mind.
@@ -270,7 +262,7 @@
                 <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
                   <i class="fas fa-award text-gold text-lg"></i>
                 </div>
-                <div class="font-semibold text-t0">7+ Years of Excellence</div>
+                <div class="font-medium text-t0 text-sm">7+ Years of Excellence</div>
               </div>
               <div class="text-t2 text-sm">Trusted expertise in premium developments</div>
             </div>
@@ -280,7 +272,7 @@
                 <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
                   <i class="fas fa-users text-gold text-lg"></i>
                 </div>
-                <div class="font-semibold text-t0">100+ Satisfied Clients</div>
+                <div class="font-medium text-t0 text-sm">100+ Satisfied Clients</div>
               </div>
               <div class="text-t2 text-sm">Homes delivered with excellence</div>
             </div>
@@ -290,16 +282,16 @@
                 <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
                   <i class="fas fa-building text-gold text-lg"></i>
                 </div>
-                <div class="font-semibold text-t0">20+ Premium Projects</div>
+                <div class="font-medium text-t0 text-sm">20+ Premium Projects</div>
               </div>
               <div class="text-t2 text-sm">Luxury developments across prime locations with a focus on documentation and delivery.</div>
             </div>
           </div>
 
-          <div class="mt-8 flex gap-3 flex-wrap">
-            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-sm glass-dark">A Khata / Clear Docs</span>
-            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-sm glass-dark">Layout Planning</span>
-            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-sm glass-dark">Investment Guidance</span>
+          <div class="mt-7 flex gap-3 flex-wrap">
+            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">A Khata / Clear Docs</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">Layout Planning</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">Investment Guidance</span>
           </div>
         </div>
       </div>
@@ -309,85 +301,102 @@
   <!-- WHY CHOOSE -->
   <section id="why-choose" class="section-padding relative pillars-bg noise">
     <div class="container mx-auto px-4 relative z-10">
-      <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0 mb-4">
+      <div class="text-center mb-14 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">
           Why Choose <span class="gradient-text">Rastrakuta</span>
         </h2>
-        <p class="text-t1 text-lg max-w-2xl mx-auto font-inter">
+        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">
           Premium quality, transparent process, and strong locations—built for peace of mind and long-term value.
         </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-16 h-16 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <i class="fas fa-shield-alt text-gold text-2xl"></i>
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
+          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-shield-alt text-gold text-xl"></i>
           </div>
-          <h3 class="text-2xl font-semibold text-t0 mb-4 text-center font-playfair">Legal Excellence</h3>
-          <p class="text-t1 text-center font-inter">Transparent documentation, clear titles, and compliance-first execution—so your investment stays safe.</p>
+          <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Legal Excellence</h3>
+          <p class="text-t1 text-sm text-center font-inter">Transparent documentation, clear titles, and compliance-first execution—so your investment stays safe.</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-16 h-16 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <i class="fas fa-gem text-gold text-2xl"></i>
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
+          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-gem text-gold text-xl"></i>
           </div>
-          <h3 class="text-2xl font-semibold text-t0 mb-4 text-center font-playfair">Luxury Craftsmanship</h3>
-          <p class="text-t1 text-center font-inter">Superior planning, premium execution standards, and thoughtful community design for lasting value.</p>
+          <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Luxury Craftsmanship</h3>
+          <p class="text-t1 text-sm text-center font-inter">Superior planning, premium execution standards, and thoughtful community design for lasting value.</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-16 h-16 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <i class="fas fa-clock text-gold text-2xl"></i>
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
+          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-clock text-gold text-xl"></i>
           </div>
-          <h3 class="text-2xl font-semibold text-t0 mb-4 text-center font-playfair">Timely Excellence</h3>
-          <p class="text-t1 text-center font-inter">Punctual delivery with consistent quality checks—your plans stay on track.</p>
+          <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Timely Excellence</h3>
+          <p class="text-t1 text-sm text-center font-inter">Punctual delivery with consistent quality checks—your plans stay on track.</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-16 h-16 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <i class="fas fa-handshake text-gold text-2xl"></i>
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
+          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-handshake text-gold text-xl"></i>
           </div>
-          <h3 class="text-2xl font-semibold text-t0 mb-4 text-center font-playfair">Personalized Service</h3>
-          <p class="text-t1 text-center font-inter">White-glove guidance from enquiry to registration—simple, responsive, and honest.</p>
+          <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Personalized Service</h3>
+          <p class="text-t1 text-sm text-center font-inter">White-glove guidance from enquiry to registration—simple, responsive, and honest.</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-16 h-16 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <i class="fas fa-map-marker-alt text-gold text-2xl"></i>
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
+          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-map-marker-alt text-gold text-xl"></i>
           </div>
-          <h3 class="text-2xl font-semibold text-t0 mb-4 text-center font-playfair">Prime Locations</h3>
-          <p class="text-t1 text-center font-inter">Carefully selected growth corridors with strong connectivity and infrastructure potential.</p>
+          <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Prime Locations</h3>
+          <p class="text-t1 text-sm text-center font-inter">Carefully selected growth corridors with strong connectivity and infrastructure potential.</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-16 h-16 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-6 mx-auto">
-            <i class="fas fa-trophy text-gold text-2xl"></i>
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
+          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+            <i class="fas fa-trophy text-gold text-xl"></i>
           </div>
-          <h3 class="text-2xl font-semibold text-t0 mb-4 text-center font-playfair">Trusted Brand</h3>
-          <p class="text-t1 text-center font-inter">Built on referrals, quality-first delivery, and consistent client satisfaction.</p>
+          <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Trusted Brand</h3>
+          <p class="text-t1 text-sm text-center font-inter">Built on referrals, quality-first delivery, and consistent client satisfaction.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS (unchanged) -->
   <section id="projects" class="section-padding relative">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0 mb-4">Our <span class="gradient-text">Projects</span></h2>
-        <p class="text-t1 text-lg max-w-2xl mx-auto font-inter">Premium plotting developments designed for lifestyle, connectivity, and long-term appreciation.</p>
+      <div class="text-center mb-14 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">Our <span class="gradient-text">Projects</span></h2>
+        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">Premium plotting developments designed for lifestyle, connectivity, and long-term appreciation.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <a href="chandanavana.html">
+          <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
+            <img src="./images/sandaltreechnadnavana.jpg" alt="Rastrakuta Chandanavana Sandalwood Farm Plots" class="w-full h-48 object-cover opacity-90" />
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-lg text-t0 font-playfair font-medium">Rastrakuta Chandanavana</h3>
+                <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Sandalwood Farm Plots</span>
+              </div>
+              <p class="text-t1 mb-4 font-inter text-sm">Premium sandalwood farm plots designed for long-term wealth creation.</p>
+              <div class="flex items-center justify-between text-xs text-t2">
+                <span><i class="fa-solid fa-seedling mr-2 text-gold"></i>Managed Plantation</span>
+                <span><i class="fa-solid fa-chart-line mr-2 text-gold"></i>High-Value Investment</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="https://www.santiamestates.com/blog/admin/assets/img/post/image_2025-04-30-12-43-48_68121b0442490.jpg" alt="Ayodhya Badavane" class="w-full h-52 object-cover opacity-90" />
+          <img src="https://www.santiamestates.com/blog/admin/assets/img/post/image_2025-04-30-12-43-48_68121b0442490.jpg" alt="Ayodhya Badavane" class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-semibold text-t0 font-playfair">Ayodhya Badavane</h3>
-              <span class="text-[11px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Layout</span>
+              <h3 class="text-lg font-playfair font-medium text-t0">Ayodhya Badavane</h3>
+              <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Layout</span>
             </div>
-            <p class="text-t1 mb-4 font-inter">A peaceful layout with well-planned plots, good roads, and all basic facilities for comfortable living.</p>
-            <div class="flex items-center justify-between text-sm text-t2">
+            <p class="text-t1 mb-4 font-inter text-sm">A peaceful layout with well-planned plots, good roads, and all basic facilities for comfortable living.</p>
+            <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-road mr-2 text-gold"></i>Wide Roads</span>
               <span><i class="fa-solid fa-file-shield mr-2 text-gold"></i>Clear Docs</span>
             </div>
@@ -395,14 +404,14 @@
         </div>
 
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="images/Kundhanaplot.jpg" alt="Kundhana Devanahalli" class="w-full h-52 object-cover opacity-90" />
+          <img src="images/Kundhanaplot.jpg" alt="Kundhana Devanahalli" class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-semibold text-t0 font-playfair">Kundhana • Devanahalli</h3>
-              <span class="text-[11px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Plots</span>
+              <h3 class="text-lg font-playfair font-medium text-t0">Kundhana • Devanahalli</h3>
+              <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Plots</span>
             </div>
-            <p class="text-t1 mb-4 font-inter">A well-planned layout with spacious plots and basic facilities in Kundhana, near Devanahalli.</p>
-            <div class="flex items-center justify-between text-sm text-t2">
+            <p class="text-t1 mb-4 font-inter text-sm">A well-planned layout with spacious plots and basic facilities in Kundhana, near Devanahalli.</p>
+            <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-location-dot mr-2 text-gold"></i>Near Airport Belt</span>
               <span><i class="fa-solid fa-tree-city mr-2 text-gold"></i>Open Spaces</span>
             </div>
@@ -410,14 +419,14 @@
         </div>
 
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="https://5.imimg.com/data5/SELLER/Default/2024/2/394674348/JO/QK/CZ/33658789/residential-land-for-sale-1000x1000.jpeg" alt="Rajankunte" class="w-full h-52 object-cover opacity-90" />
+          <img src="https://5.imimg.com/data5/SELLER/Default/2024/2/394674348/JO/QK/CZ/33658789/residential-land-for-sale-1000x1000.jpeg" alt="Rajankunte" class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-semibold text-t0 font-playfair">Rajankunte</h3>
-              <span class="text-[11px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Layout</span>
+              <h3 class="text-lg font-playfair font-medium text-t0">Rajankunte</h3>
+              <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Layout</span>
             </div>
-            <p class="text-t1 mb-4 font-inter">A peaceful residential layout with well-planned plots and all basic facilities in Rajankunte.</p>
-            <div class="flex items-center justify-between text-sm text-t2">
+            <p class="text-t1 mb-4 font-inter text-sm">A peaceful residential layout with well-planned plots and all basic facilities in Rajankunte.</p>
+            <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-house-chimney mr-2 text-gold"></i>Residential Zone</span>
               <span><i class="fa-solid fa-wifi mr-2 text-gold"></i>Connectivity</span>
             </div>
@@ -425,51 +434,33 @@
         </div>
 
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="https://files.propertywala.com/photos/8d/P762946405.default.22108045.jpg" alt="Gauribidanur" class="w-full h-52 object-cover opacity-90" />
+          <img src="https://files.propertywala.com/photos/8d/P762946405.default.22108045.jpg" alt="Gauribidanur" class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-semibold text-t0 font-playfair">Gauribidanur</h3>
-              <span class="text-[11px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Plots</span>
+              <h3 class="text-lg font-playfair font-medium text-t0">Gauribidanur</h3>
+              <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Plots</span>
             </div>
-            <p class="text-t1 mb-4 font-inter">A well-planned residential layout with clear plots and good basic facilities in Gauribidanur.</p>
-            <div class="flex items-center justify-between text-sm text-t2">
+            <p class="text-t1 mb-4 font-inter text-sm">A well-planned residential layout with clear plots and good basic facilities in Gauribidanur.</p>
+            <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-seedling mr-2 text-gold"></i>Growth Corridor</span>
               <span><i class="fa-solid fa-shield-heart mr-2 text-gold"></i>Peaceful Living</span>
             </div>
           </div>
         </div>
 
-        <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="./images/sandaltreechnadnavana.jpg" alt="Rastrakuta Chandanavana Sandalwood Farm Plots" class="w-full h-52 object-cover opacity-90" />
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-2">
-              <h3 class="text-xl font-semibold text-t0 font-playfair">Rastrakuta Chandanavana</h3>
-              <span class="text-[11px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Sandalwood Farm Plots</span>
-            </div>
-            <p class="text-t1 mb-4 font-inter">
-              Premium sandalwood farm plots designed for long-term wealth creation.
-            </p>
-            <div class="flex items-center justify-between text-sm text-t2">
-              <span><i class="fa-solid fa-seedling mr-2 text-gold"></i>Managed Plantation</span>
-              <span><i class="fa-solid fa-chart-line mr-2 text-gold"></i>High-Value Investment</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- FULL WIDTH CTA CARD -->
         <div class="marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll card-hover lg:col-span-3">
-          <div class="p-8 md:p-12 relative text-center">
+          <div class="p-8 md:p-10 relative text-center">
             <div class="absolute inset-0 noise"></div>
             <div class="relative z-10 max-w-4xl mx-auto">
-              <h3 class="cta-title text-2xl md:text-3xl text-t0">Want the Latest Inventory & Site Visit Slots</h3>
+              <h3 class="cta-title text-xl md:text-2xl text-t0">Want the Latest Inventory & Site Visit Slots</h3>
               <p class="cta-subtitle text-t1 mt-3">
                 Get a curated list of available plots, pricing ranges, and documentation checklist — delivered directly on WhatsApp.
               </p>
-              <div class="mt-7 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" class="inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-8 py-4 rounded-xl font-semibold transition-all shadow-glow">
+              <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-7 py-3.5 rounded-xl font-medium transition-all shadow-glow text-sm sm:text-base">
                   Request Details <i class="fa-solid fa-paper-plane ml-2"></i>
                 </a>
-                <a href="#contact" class="inline-flex items-center justify-center glass-dark px-8 py-4 rounded-xl font-semibold text-t0 hover:border-gold/40 transition-all">
+                <a href="#contact" class="inline-flex items-center justify-center glass-dark px-7 py-3.5 rounded-xl font-medium text-t0 hover:border-gold/40 transition-all text-sm sm:text-base">
                   Book a Site Visit <i class="fa-solid fa-calendar-check ml-2"></i>
                 </a>
               </div>
@@ -481,40 +472,40 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
+  <!-- TESTIMONIALS (unchanged) -->
   <section id="testimonials" class="section-padding relative pillars-bg noise">
     <div class="container mx-auto px-4 relative z-10">
-      <div class="text-center mb-16 animate-on-scroll">
-        <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0 mb-4">Client <span class="gradient-text">Testimonials</span></h2>
-        <p class="text-t1 text-lg max-w-2xl mx-auto font-inter">Trusted by clients who value transparency, premium quality, and a smooth buying experience.</p>
+      <div class="text-center mb-14 animate-on-scroll">
+        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">Client <span class="gradient-text">Testimonials</span></h2>
+        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">Trusted by clients who value transparency, premium quality, and a smooth buying experience.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
           <div class="flex items-center mb-5">
-            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Arjun Mehta" class="w-14 h-14 rounded-full mr-4 border border-white/10" />
-            <div><h4 class="font-semibold text-t0 font-inter">Arjun Mehta</h4><p class="text-t2 text-sm">CEO, Tech Innovations</p></div>
+            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Arjun Mehta" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
+            <div><h4 class="font-medium text-t0 font-inter text-sm">Arjun Mehta</h4><p class="text-t2 text-xs">CEO, Tech Innovations</p></div>
           </div>
-          <div class="flex mb-4 gap-1 text-gold"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-t1 font-inter">“Super professional process and documentation. The team is transparent and supportive from visit to registration.”</p>
+          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="text-t1 font-inter text-sm">“Super professional process and documentation. The team is transparent and supportive from visit to registration.”</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
           <div class="flex items-center mb-5">
-            <img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Kavya Sharma" class="w-14 h-14 rounded-full mr-4 border border-white/10" />
-            <div><h4 class="font-semibold text-t0 font-inter">Kavya Sharma</h4><p class="text-t2 text-sm">Investment Banker</p></div>
+            <img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Kavya Sharma" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
+            <div><h4 class="font-medium text-t0 font-inter text-sm">Kavya Sharma</h4><p class="text-t2 text-xs">Investment Banker</p></div>
           </div>
-          <div class="flex mb-4 gap-1 text-gold"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-t1 font-inter">“Great guidance and excellent location recommendations. Clear documentation and genuine support throughout.”</p>
+          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="text-t1 font-inter text-sm">“Great guidance and excellent location recommendations. Clear documentation and genuine support throughout.”</p>
         </div>
 
-        <div class="card-hover marble p-8 rounded-2xl shadow-soft animate-on-scroll">
+        <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
           <div class="flex items-center mb-5">
-            <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Rohit Gupta" class="w-14 h-14 rounded-full mr-4 border border-white/10" />
-            <div><h4 class="font-semibold text-t0 font-inter">Rohit Gupta</h4><p class="text-t2 text-sm">Senior Advocate</p></div>
+            <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Rohit Gupta" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
+            <div><h4 class="font-medium text-t0 font-inter text-sm">Rohit Gupta</h4><p class="text-t2 text-xs">Senior Advocate</p></div>
           </div>
-          <div class="flex mb-4 gap-1 text-gold"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-t1 font-inter">“Impeccable documentation and quality. A clean, trustworthy process—exactly what buyers need.”</p>
+          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="text-t1 font-inter text-sm">“Impeccable documentation and quality. A clean, trustworthy process—exactly what buyers need.”</p>
         </div>
       </div>
     </div>
@@ -525,23 +516,23 @@
     <div class="container mx-auto px-4">
       <div class="grid lg:grid-cols-2 gap-10 items-stretch">
         <div class="animate-on-scroll flex flex-col">
-          <h2 class="text-4xl md:text-5xl font-playfair font-bold text-t0">
+          <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0">
             Let’s Build Your <span class="gradient-text">Next Investment</span>
           </h2>
-          <p class="text-t1 mt-4 max-w-xl">
+          <p class="text-t1 mt-4 max-w-xl text-sm sm:text-base">
             Share your requirement and we’ll send you available options, location insights,
             and a documentation checklist.
           </p>
 
-          <div class="mt-8 space-y-4 flex-1 flex flex-col">
+          <div class="mt-7 space-y-4 flex-1 flex flex-col">
             <div class="glass-dark rounded-2xl p-5">
               <div class="flex items-center gap-3">
                 <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center">
                   <i class="fa-solid fa-phone text-gold"></i>
                 </div>
                 <div>
-                  <div class="text-t0 font-semibold">Phone</div>
-                  <div class="text-t2 text-sm">+91 82173 11305</div>
+                  <div class="text-t0 font-medium text-sm">Phone</div>
+                  <div class="text-t2 text-sm">+91 9886990006</div>
                 </div>
               </div>
             </div>
@@ -552,7 +543,7 @@
                   <i class="fa-solid fa-envelope text-gold"></i>
                 </div>
                 <div>
-                  <div class="text-t0 font-semibold">Email</div>
+                  <div class="text-t0 font-medium text-sm">Email</div>
                   <div class="text-t2 text-sm">rastrakutainfra@gmail.com</div>
                 </div>
               </div>
@@ -564,7 +555,7 @@
                   <i class="fa-solid fa-location-dot text-gold"></i>
                 </div>
                 <div>
-                  <div class="text-t0 font-semibold">Address</div>
+                  <div class="text-t0 font-medium text-sm">Address</div>
                   <div class="text-t2 text-sm">
                     #14, 1st floor, 6A cross road, Talacauvery layout,
                     Amruthalli Road, Sahakara Nagar post,
@@ -576,51 +567,79 @@
           </div>
         </div>
 
+        <!-- ✅ FORM (updated) -->
         <div class="animate-on-scroll">
           <div class="marble rounded-2xl shadow-soft p-7 relative overflow-hidden h-full flex flex-col">
             <div class="absolute inset-0 noise"></div>
 
             <div class="relative z-10 flex flex-col h-full">
-              <h3 class="text-2xl font-playfair font-bold text-t0">Enquiry Form</h3>
-              <p class="text-t2 mt-2">We’ll call you back within 24 hours.</p>
+              <h3 class="text-xl font-playfair font-medium text-t0">Enquiry Form</h3>
+              <p class="text-t2 mt-2 text-sm">We’ll call you back within 24 hours.</p>
 
               <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm">
                 <div>
                   <label class="text-t2 text-sm">Full Name</label>
-                  <input type="text" required
-                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                    placeholder="Your name" />
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="name"
+                    required
+                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
+                    placeholder="Your name"
+                  />
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label class="text-t2 text-sm">Phone</label>
-                    <input type="tel" required
-                      class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                      placeholder="+91 XXXXX XXXXX" />
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      required
+                      class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
+                      placeholder="+91 XXXXX XXXXX"
+                    />
                   </div>
+
                   <div>
                     <label class="text-t2 text-sm">Email</label>
-                    <input type="email"
-                      class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3"
-                      placeholder="name@email.com" />
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
+                      placeholder="name@email.com"
+                    />
                   </div>
                 </div>
 
                 <div>
                   <label class="text-t2 text-sm">Requirement</label>
                   <select
-                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3">
+                    id="requirement"
+                    name="requirement"
+                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
+                  >
                     <option>Villa Plot</option>
                     <option>Residential Layout Plot</option>
+                    <option>Farm Plot (Optional)</option>
                     <option>Investment Options</option>
                     <option>Site Visit</option>
                   </select>
                 </div>
 
-                <button type="submit"
-                  class="mt-auto w-full shimmer-line bg-gold hover:bg-gold2 text-ink px-6 py-4 rounded-xl font-semibold text-lg transition-all shadow-glow">
-                  Submit Enquiry <i class="fa-solid fa-arrow-right ml-2"></i>
+                <!-- Status message -->
+                <div id="formStatus" class="hidden text-sm rounded-xl px-4 py-3 border"></div>
+
+                <button
+                  type="submit"
+                  id="submitBtn"
+                  class="mt-auto w-full shimmer-line bg-gold hover:bg-gold2 text-ink px-6 py-3.5 rounded-xl font-medium text-base transition-all shadow-glow inline-flex items-center justify-center gap-2"
+                >
+                  <span id="btnText">Submit Enquiry</span>
+                  <i id="btnIcon" class="fa-solid fa-arrow-right"></i>
+                  <i id="btnSpinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
                 </button>
 
                 <p class="text-[12px] text-t2 text-center mt-3">
@@ -632,12 +651,13 @@
         </div>
       </div>
 
+      <!-- MAP -->
       <div class="mt-12 animate-on-scroll">
         <div class="glass-dark rounded-2xl overflow-hidden shadow-soft">
-          <div class="px-6 py-4 text-t0 font-semibold flex items-center gap-2">
+          <div class="px-6 py-4 text-t0 font-medium flex items-center gap-2 text-sm">
             <i class="fa-solid fa-map-location-dot text-gold"></i> Google Map Location
           </div>
-          <div class="w-full h-[320px] md:h-[380px]">
+          <div class="w-full h-[300px] md:h-[360px]">
             <iframe
               class="w-full h-full"
               loading="lazy"
@@ -651,28 +671,32 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER (unchanged) -->
   <footer class="bg-[#06080D] text-t1 py-12 border-t border-white/10">
     <div class="container mx-auto px-4">
       <div class="grid md:grid-cols-4 gap-8">
         <div>
           <div class="flex items-center mb-4 space-x-3">
-            <div class="h-12 w-auto rounded-sm flex items-center justify-center">
-              <img class="h-full" src="./images/footer logo.png" alt="Rastrakuta" />
+            <div class="flex items-center">
+              <img
+                src="./images/Rastrakuta Logo_20260205_095728_0000.png"
+                alt="Rastrakuta"
+                class="h-12 md:h-14 w-auto object-contain"
+              />
             </div>
           </div>
-          <p class="text-t2 mb-4 font-inter">Creating premium communities and building lasting relationships through excellence and transparency in real estate development.</p>
+          <p class="text-t2 mb-4 font-inter text-sm">Creating premium communities and building lasting relationships through excellence and transparency in real estate development.</p>
           <div class="flex space-x-4">
-            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
-            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-instagram text-xl"></i></a>
-            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-facebook-f text-lg"></i></a>
+            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-twitter text-lg"></i></a>
+            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-instagram text-lg"></i></a>
+            <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-linkedin-in text-lg"></i></a>
           </div>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4 font-playfair text-t0">Quick Links</h3>
-          <ul class="space-y-2 font-inter">
+          <h3 class="text-base font-playfair font-medium mb-4 text-t0">Quick Links</h3>
+          <ul class="space-y-2 font-inter text-sm">
             <li><a href="#about" class="text-t2 hover:text-gold transition-colors">About Us</a></li>
             <li><a href="#projects" class="text-t2 hover:text-gold transition-colors">Our Projects</a></li>
             <li><a href="#testimonials" class="text-t2 hover:text-gold transition-colors">Testimonials</a></li>
@@ -681,8 +705,8 @@
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4 font-playfair text-t0">Services</h3>
-          <ul class="space-y-2 font-inter">
+          <h3 class="text-base font-playfair font-medium mb-4 text-t0">Services</h3>
+          <ul class="space-y-2 font-inter text-sm">
             <li><a href="#" class="text-t2 hover:text-gold transition-colors">Premium Plotting</a></li>
             <li><a href="#" class="text-t2 hover:text-gold transition-colors">Residential Layouts</a></li>
             <li><a href="#" class="text-t2 hover:text-gold transition-colors">Investment Advisory</a></li>
@@ -691,32 +715,52 @@
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold mb-4 font-playfair text-t0">Contact Us</h3>
-          <ul class="space-y-4 font-inter">
+          <h3 class="text-base font-playfair font-medium mb-4 text-t0">Contact Us</h3>
+          <ul class="space-y-4 font-inter text-sm">
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-phone text-gold mt-1"></i>
-              <div><h4 class="font-semibold text-t0">+91 82173 11305</h4></div>
+              <div><h4 class="font-medium text-t0">+91 9886990006</h4></div>
             </li>
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-envelope text-gold mt-1"></i>
-              <div><h4 class="font-semibold text-t0">rastrakutainfra@gmail.com</h4></div>
+              <div><h4 class="font-medium text-t0">rastrakutainfra@gmail.com</h4></div>
             </li>
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-location-dot text-gold mt-1"></i>
-              <div><h4 class="text-sm font-semibold text-t0">#14, 1st floor, 6A cross road, Talacauvery layout, Amruthalli Road, Sahakara Nagar post, Bengaluru 560092</h4></div>
+              <div><h4 class="text-sm font-medium text-t0">#14, 1st floor, 6A cross road, Talacauvery layout, Amruthalli Road, Sahakara Nagar post, Bengaluru 560092</h4></div>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="border-t border-white/10 mt-8 pt-8 text-center">
-        <p class="text-t2 font-inter">© 2024 Rastrakuta Infra Developers Pvt Ltd. All rights reserved. | Privacy Policy | Terms of Service</p>
+        <p class="text-t2 font-inter text-sm">© 2024 Rastrakuta Infra Developers Pvt Ltd. All rights reserved. | Privacy Policy | Terms of Service</p>
       </div>
     </div>
   </footer>
 
+  <!-- ✅ Sticky Call & WhatsApp Buttons -->
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
+    <a
+      href="https://wa.me/919886990006"
+      target="_blank"
+      class="w-11 h-11 flex items-center justify-center rounded-full bg-green-500 text-white shadow-lg hover:scale-105 transition"
+      aria-label="WhatsApp"
+    >
+      <i class="fab fa-whatsapp text-lg"></i>
+    </a>
+
+    <a
+      href="tel:9886990006"
+      class="w-11 h-11 flex items-center justify-center rounded-full bg-gold text-ink shadow-lg hover:scale-105 transition"
+      aria-label="Call Now"
+    >
+      <i class="fa-solid fa-phone text-sm"></i>
+    </a>
+  </div>
+
+  <!-- UI + Scroll scripts -->
   <script>
-    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", function (e) {
         e.preventDefault();
@@ -725,22 +769,16 @@
       });
     });
 
-    // Mobile menu open/close + backdrop
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
     const backdrop = document.getElementById("menu-backdrop");
 
     mobileMenuBtn.addEventListener("click", () => mobileMenu.classList.toggle("hidden"));
-
-    if (backdrop) {
-      backdrop.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-    }
-
+    if (backdrop) backdrop.addEventListener("click", () => mobileMenu.classList.add("hidden"));
     document.querySelectorAll("#mobile-menu a").forEach((link) =>
       link.addEventListener("click", () => mobileMenu.classList.add("hidden"))
     );
 
-    // Navbar style on scroll
     const navbar = document.getElementById("navbar");
     function setNav() {
       if (window.scrollY > 30) {
@@ -757,14 +795,12 @@
     window.addEventListener("scroll", setNav);
     setNav();
 
-    // Animate on scroll
     const observerOptions = { threshold: 0.12, rootMargin: "0px 0px -50px 0px" };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => { if (entry.isIntersecting) entry.target.classList.add("animate"); });
     }, observerOptions);
     document.querySelectorAll(".animate-on-scroll").forEach((el) => observer.observe(el));
 
-    // Scroll progress bar
     const scrollProgress = document.createElement("div");
     scrollProgress.className = "fixed top-0 left-0 h-[2px] bg-gold z-50 transition-all duration-200";
     scrollProgress.style.width = "0%";
@@ -776,10 +812,9 @@
       scrollProgress.style.opacity = window.scrollY > 40 ? "1" : "0";
     });
 
-    // Back to top
     const backToTop = document.createElement("button");
     backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTop.className = "fixed bottom-8 right-8 bg-gold hover:bg-gold2 text-ink w-12 h-12 rounded-full shadow-glow transition-all duration-300 opacity-0 translate-y-8 z-50";
+    backToTop.className = "fixed bottom-8 right-20 bg-gold hover:bg-gold2 text-ink w-11 h-11 rounded-full shadow-glow transition-all duration-300 opacity-0 translate-y-8 z-50";
     document.body.appendChild(backToTop);
 
     window.addEventListener("scroll", () => {
@@ -788,16 +823,87 @@
     });
 
     backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-
-    // Lead form
-    const leadForm = document.getElementById("leadForm");
-    if (leadForm) {
-      leadForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        alert("Thank you! Our team will contact you within 24 hours.");
-        this.reset();
-      });
-    }
   </script>
+  <script>
+  const SHEET_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyacwFXK7UWHdyEz1E99-T6ONGIVhNe-hkZTKSvYXbJ3r3q5e-9r7zkroGK4QrypfSY/exec";
+
+  const leadForm = document.getElementById("leadForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const btnText = document.getElementById("btnText");
+  const btnIcon = document.getElementById("btnIcon");
+  const btnSpinner = document.getElementById("btnSpinner");
+  const formStatus = document.getElementById("formStatus");
+
+  let isSubmitting = false;
+
+  function setLoading(isLoading) {
+    submitBtn.disabled = isLoading;
+    submitBtn.classList.toggle("opacity-70", isLoading);
+    submitBtn.classList.toggle("cursor-not-allowed", isLoading);
+
+    btnText.textContent = isLoading ? "Submitting..." : "Submit Enquiry";
+    btnIcon.classList.toggle("hidden", isLoading);
+    btnSpinner.classList.toggle("hidden", !isLoading);
+  }
+
+  function showStatus(type, message) {
+    formStatus.classList.remove("hidden");
+    formStatus.textContent = message;
+
+    formStatus.classList.remove("border-green-400/30", "bg-green-500/10", "text-green-200");
+    formStatus.classList.remove("border-red-400/30", "bg-red-500/10", "text-red-200");
+
+    if (type === "success") {
+      formStatus.classList.add("border-green-400/30", "bg-green-500/10", "text-green-200");
+    } else {
+      formStatus.classList.add("border-red-400/30", "bg-red-500/10", "text-red-200");
+    }
+  }
+
+  async function sendToSheet(payload) {
+    const res = await fetch(SHEET_WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    return await res.json();
+  }
+
+  leadForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    isSubmitting = true;
+    setLoading(true);
+    showStatus("success", "⏳ Sending your enquiry...");
+
+    const payload = {
+      page: "index",
+      name: document.getElementById("fullName").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      requirement: document.getElementById("requirement").value
+    };
+
+    try {
+      const out = await sendToSheet(payload);
+
+      if (out.status === "success") {
+        showStatus("success", "✅ Submitted successfully! Our team will contact you soon.");
+        leadForm.reset();
+      } else {
+        showStatus("error", "❌ Submission failed: " + (out.message || "Unknown error"));
+      }
+    } catch (err) {
+      showStatus("error", "❌ Network error: " + (err.message || "Failed to fetch"));
+    } finally {
+      setLoading(false);
+      isSubmitting = false;
+    }
+  });
+</script>
+
+
+  
 </body>
 </html>
