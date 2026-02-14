@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Rastrakuta - Premium Real Estate</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts + Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- ✅ SweetAlert2 (required for Swal.fire) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     tailwind.config = {
@@ -33,184 +42,270 @@
   </script>
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
       font-family: "Inter", sans-serif;
       background:
-        radial-gradient(1200px 700px at 15% 10%, rgba(212,175,55,0.10), transparent 55%),
-        radial-gradient(900px 600px at 85% 15%, rgba(46,119,255,0.10), transparent 55%),
-        linear-gradient(180deg,#0A0F18 0%,#0E1727 60%,#0A0F18 100%);
-      color:rgba(255,255,255,0.90);
-      line-height:1.6;
-      overflow-x:hidden;
-      font-weight:400;
+        radial-gradient(1200px 700px at 15% 10%, rgba(212, 175, 55, 0.10), transparent 55%),
+        radial-gradient(900px 600px at 85% 15%, rgba(46, 119, 255, 0.10), transparent 55%),
+        linear-gradient(180deg, #0A0F18 0%, #0E1727 60%, #0A0F18 100%);
+      color: rgba(255, 255, 255, 0.90);
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-weight: 400;
     }
 
-    .container{width:92%!important;max-width:1280px!important}
-    .animate-on-scroll{opacity:0;transform:translateY(26px);transition:all 0.8s ease-out}
-    .animate-on-scroll.animate{opacity:1;transform:translateY(0)}
-
-    .noise:before{
-      content:"";
-      position:absolute;inset:0;
-      pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
-      mix-blend-mode:overlay;
-      opacity:0.30;
+    .container {
+      width: 92% !important;
+      max-width: 1280px !important
     }
 
-    .pillars-bg{position:relative;overflow:hidden}
-    .pillars-bg:before{
-      content:"";
-      position:absolute;inset:-1px;
-      pointer-events:none;
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: all 0.8s ease-out
+    }
+
+    .animate-on-scroll.animate {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    .noise:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: 0.30;
+    }
+
+    .pillars-bg {
+      position: relative;
+      overflow: hidden
+    }
+
+    .pillars-bg:before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      pointer-events: none;
       background:
-        linear-gradient(180deg, rgba(7,10,15,0.45) 0%, rgba(7,10,15,0.55) 100%),
+        linear-gradient(180deg, rgba(7, 10, 15, 0.45) 0%, rgba(7, 10, 15, 0.55) 100%),
         url("https://exampariksha.com/wp-content/uploads/2015/01/The-Rashtrakuta-dynasty-Kailash-Temple-Ellora.jpg");
-      background-size:cover;
-      background-position:center;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-      opacity:0.55;
-      filter:grayscale(0.25) contrast(1.05) brightness(0.95);
-      mix-blend-mode:normal;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      opacity: 0.55;
+      filter: grayscale(0.25) contrast(1.05) brightness(0.95);
+      mix-blend-mode: normal;
     }
 
-    .pillars-bg:after{
-      content:"";
-      position:absolute;inset:0;
-      pointer-events:none;
+    .pillars-bg:after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
       background:
-        radial-gradient(900px 420px at 50% 20%, rgba(212,175,55,0.14), transparent 60%),
-        radial-gradient(1000px 600px at 50% 95%, rgba(0,0,0,0.22), transparent 55%);
-      opacity:0.75;
+        radial-gradient(900px 420px at 50% 20%, rgba(212, 175, 55, 0.14), transparent 60%),
+        radial-gradient(1000px 600px at 50% 95%, rgba(0, 0, 0, 0.22), transparent 55%);
+      opacity: 0.75;
     }
 
-    @media (max-width:768px){
-      .pillars-bg:before{ background-attachment:scroll; }
+    @media (max-width:768px) {
+      .pillars-bg:before {
+        background-attachment: scroll;
+      }
     }
 
-    .marble{
+    .marble {
       background:
-        radial-gradient(1200px 240px at 20% 10%, rgba(212,175,55,0.16), transparent 60%),
-        radial-gradient(900px 260px at 70% 5%, rgba(255,255,255,0.07), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%);
-      border:1px solid rgba(255,255,255,0.12);
+        radial-gradient(1200px 240px at 20% 10%, rgba(212, 175, 55, 0.16), transparent 60%),
+        radial-gradient(900px 260px at 70% 5%, rgba(255, 255, 255, 0.07), transparent 62%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    .glass-dark{
-      background:rgba(15,23,38,0.55);
-      backdrop-filter:blur(12px);
-      border:1px solid rgba(255,255,255,0.12);
+    .glass-dark {
+      background: rgba(15, 23, 38, 0.55);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
     }
 
-    .gradient-text{
-      background:linear-gradient(135deg,#d4af37 0%,#b8860b 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
+    .gradient-text {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .card-hover{transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease}
-    .card-hover:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.55);border-color:rgba(212,175,55,0.28)}
-
-    .hero-bg{background-size:cover;background-position:center;background-attachment:fixed;position:relative;}
-    @media (max-width:768px){ .hero-bg{background-attachment:scroll} }
-
-    .shimmer-line{position:relative;overflow:hidden}
-    .shimmer-line:after{
-      content:"";
-      position:absolute;top:0;left:-40%;
-      width:35%;height:100%;
-      background:linear-gradient(90deg, transparent, rgba(212,175,55,0.25), transparent);
-      transform:skewX(-18deg);
-      animation:shimmer 2.6s linear infinite;
+    .card-hover {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease
     }
 
-    .section-padding{padding:4.25rem 0}
-
-    .cta-title{
-      font-family:"Cinzel",serif;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-      font-weight:600;
-      text-shadow:0 10px 40px rgba(0,0,0,0.45);
-    }
-    .cta-subtitle{
-      font-family:"Inter",sans-serif;
-      font-weight:300;
-      letter-spacing:0.02em;
-      font-size:1rem;
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      border-color: rgba(212, 175, 55, 0.28)
     }
 
-    @media (max-width:768px){ .section-padding{padding:3rem 0} }
+    .hero-bg {
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
 
-    h1,h2,h3,h4{font-weight:600}
-    p,span,a,li,label,option,select,input,button{font-weight:400}
-    @supports (padding: max(0px)) { nav { padding-top: env(safe-area-inset-top); } }
+    @media (max-width:768px) {
+      .hero-bg {
+        background-attachment: scroll
+      }
+    }
+
+    .shimmer-line {
+      position: relative;
+      overflow: hidden
+    }
+
+    .shimmer-line:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -40%;
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.25), transparent);
+      transform: skewX(-18deg);
+      animation: shimmer 2.6s linear infinite;
+    }
+
+    .section-padding {
+      padding: 4.25rem 0
+    }
+
+    .cta-title {
+      font-family: "Cinzel", serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .cta-subtitle {
+      font-family: "Inter", sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      font-size: 1rem;
+    }
+
+    @media (max-width:768px) {
+      .section-padding {
+        padding: 3rem 0
+      }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 600
+    }
+
+    p,
+    span,
+    a,
+    li,
+    label,
+    option,
+    select,
+    input,
+    button {
+      font-weight: 400
+    }
+
+    @supports (padding: max(0px)) {
+      nav {
+        padding-top: env(safe-area-inset-top);
+      }
+    }
   </style>
 </head>
 
 <body>
   <!-- NAV -->
-<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
-  <div class="mx-auto container px-4 py-3">
-    <div class="flex items-center justify-between">
-      
-      <!-- Logo -->
-      <a href="#hero" class="flex items-center">
-        <img
-          src="./images/Rastrakuta Logo_20260205_095728_0000.png"
-          alt="Rastrakuta"
-          class="h-12 w-auto sm:h-14 md:h-16 lg:h-20 object-contain"
-        />
-      </a>
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+    <div class="mx-auto container px-4 py-3">
+      <div class="flex items-center justify-between">
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center gap-7 text-[13px]">
-        <a href="#hero" class="text-t1 hover:text-gold transition-colors">Home</a>
-        <a href="#about" class="text-t1 hover:text-gold transition-colors">About</a>
-        <a href="#why-choose" class="text-t1 hover:text-gold transition-colors">Why Choose</a>
-        <a href="#projects" class="text-t1 hover:text-gold transition-colors">Projects</a>
-        <a href="#testimonials" class="text-t1 hover:text-gold transition-colors">Testimonials</a>
-        <a href="#contact" class="text-t1 hover:text-gold transition-colors">Contact</a>
+        <!-- Logo -->
+        <a href="#hero" class="flex items-center">
+          <img src="./images/Rastrakuta Logo_20260205_095728_0000.png" alt="Rastrakuta"
+            class="h-12 w-auto sm:h-14 md:h-16 lg:h-20 object-contain" />
+        </a>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-7 text-[13px]">
+          <a href="#hero" class="text-t1 hover:text-gold transition-colors">Home</a>
+          <a href="#about" class="text-t1 hover:text-gold transition-colors">About</a>
+          <a href="#why-choose" class="text-t1 hover:text-gold transition-colors">Why Choose</a>
+          <a href="#projects" class="text-t1 hover:text-gold transition-colors">Projects</a>
+          <a href="#testimonials" class="text-t1 hover:text-gold transition-colors">Testimonials</a>
+          <a href="#contact" class="text-t1 hover:text-gold transition-colors">Contact</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-t0 text-2xl" id="mobile-menu-btn" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
-
-      <!-- Mobile Menu Button -->
-      <button class="md:hidden text-t0 text-2xl" id="mobile-menu-btn" aria-label="Open menu">
-        <i class="fas fa-bars"></i>
-      </button>
     </div>
-  </div>
 
-  <!-- Mobile Menu -->
-  <div class="md:hidden hidden" id="mobile-menu">
-    <!-- Backdrop -->
-    <div class="fixed inset-0 bg-black/60 z-40" id="menu-backdrop"></div>
+    <!-- Mobile Menu -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <!-- Backdrop -->
+      <div class="fixed inset-0 bg-black/60 z-40" id="menu-backdrop"></div>
 
-    <!-- Panel -->
-    <div class="fixed top-[72px] left-0 right-0 z-50">
-      <div class="mx-auto container px-4">
-        <div class="glass-dark rounded-2xl p-4 space-y-1 text-sm shadow-soft">
-          <a href="#hero" class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Home</a>
-          <a href="#about" class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">About</a>
-          <a href="#why-choose" class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Why Choose</a>
-          <a href="#projects" class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Projects</a>
-          <a href="#testimonials" class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Testimonials</a>
-          <a href="#contact" class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Contact</a>
+      <!-- Panel -->
+      <div class="fixed top-[72px] left-0 right-0 z-50">
+        <div class="mx-auto container px-4">
+          <div class="glass-dark rounded-2xl p-4 space-y-1 text-sm shadow-soft">
+            <a href="#hero"
+              class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Home</a>
+            <a href="#about"
+              class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">About</a>
+            <a href="#why-choose"
+              class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Why
+              Choose</a>
+            <a href="#projects"
+              class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Projects</a>
+            <a href="#testimonials"
+              class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Testimonials</a>
+            <a href="#contact"
+              class="mobile-link block py-2 px-2 rounded-lg text-t1 hover:text-gold hover:bg-white/5 transition">Contact</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</nav>
-
+  </nav>
 
   <!-- HERO -->
-  <section id="hero" class="hero-bg flex items-center justify-center relative overflow-hidden pillars-bg noise pt-24 md:pt-0 min-h-[100svh]">
+  <section id="hero"
+    class="hero-bg flex items-center justify-center relative overflow-hidden pillars-bg noise pt-24 md:pt-0 min-h-[100svh]">
     <div class="container mx-auto px-4 text-center relative z-10">
       <div class="animate-on-scroll">
-        <h1 class="text-3xl sm:text-4xl md:text-6xl font-playfair font-semibold text-t0 mb-4 leading-[1.12] md:leading-tight">
+        <h1
+          class="text-3xl sm:text-4xl md:text-6xl font-playfair font-semibold text-t0 mb-4 leading-[1.12] md:leading-tight">
           Elevate Your Life with
           <span class="gradient-text block mt-2">Signature Living Spaces</span>
         </h1>
@@ -221,18 +316,23 @@
         </p>
 
         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-md sm:max-w-none mx-auto">
-          <a href="#projects" class="shimmer-line w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base transition-all duration-300 shadow-glow">
+          <a href="#projects"
+            class="shimmer-line w-full sm:w-auto inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base transition-all duration-300 shadow-glow">
             Explore Projects <i class="fa-solid fa-arrow-right ml-2"></i>
           </a>
-          <a href="#contact" class="w-full sm:w-auto inline-flex items-center justify-center glass-dark text-t0 px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base hover:border-gold/40 transition-all duration-300">
+          <a href="#contact"
+            class="w-full sm:w-auto inline-flex items-center justify-center glass-dark text-t0 px-6 py-3.5 rounded-xl font-medium text-sm sm:text-base hover:border-gold/40 transition-all duration-300">
             Enquire Now <i class="fa-regular fa-message ml-2"></i>
           </a>
         </div>
 
         <div class="mt-9 sm:mt-10 flex justify-center gap-4 sm:gap-6 text-t2 flex-wrap text-sm">
-          <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i><span>Clear Titles</span></div>
-          <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold"></i><span>Trusted Process</span></div>
-          <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-gold"></i><span>Prime Locations</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-gold"></i><span>Clear
+              Titles</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-gold"></i><span>Trusted
+              Process</span></div>
+          <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-gold"></i><span>Prime
+              Locations</span></div>
         </div>
       </div>
     </div>
@@ -243,19 +343,11 @@
     <div class="container mx-auto px-4">
       <div class="grid md:grid-cols-2 gap-12 items-center">
         <div class="animate-on-scroll">
-  <div class="relative rounded-2xl overflow-hidden marble shadow-soft">
-    
-    <img
-      src="images/aboutimg.jpg"
-      alt="About Rastrakuta"
-      class="w-full aspect-[4/3] object-cover opacity-90"
-    />
-
-    <div class="absolute inset-0 noise"></div>
-
-  </div>
-</div>
-
+          <div class="relative rounded-2xl overflow-hidden marble shadow-soft">
+            <img src="images/aboutimg.jpg" alt="About Rastrakuta" class="w-full aspect-[4/3] object-cover opacity-90" />
+            <div class="absolute inset-0 noise"></div>
+          </div>
+        </div>
 
         <div class="animate-on-scroll">
           <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-5">
@@ -295,14 +387,18 @@
                 </div>
                 <div class="font-medium text-t0 text-sm">20+ Premium Projects</div>
               </div>
-              <div class="text-t2 text-sm">Luxury developments across prime locations with a focus on documentation and delivery.</div>
+              <div class="text-t2 text-sm">Luxury developments across prime locations with a focus on documentation and
+                delivery.</div>
             </div>
           </div>
 
           <div class="mt-7 flex gap-3 flex-wrap">
-            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">A Khata / Clear Docs</span>
-            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">Layout Planning</span>
-            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">Investment Guidance</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">A Khata / Clear
+              Docs</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">Layout
+              Planning</span>
+            <span class="px-4 py-2 rounded-full border border-white/10 text-t2 text-xs glass-dark">Investment
+              Guidance</span>
           </div>
         </div>
       </div>
@@ -323,74 +419,91 @@
 
       <div class="grid md:grid-cols-3 gap-8">
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+          <div
+            class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
             <i class="fas fa-shield-alt text-gold text-xl"></i>
           </div>
           <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Legal Excellence</h3>
-          <p class="text-t1 text-sm text-center font-inter">Transparent documentation, clear titles, and compliance-first execution—so your investment stays safe.</p>
+          <p class="text-t1 text-sm text-center font-inter">Transparent documentation, clear titles, and
+            compliance-first execution—so your investment stays safe.</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+          <div
+            class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
             <i class="fas fa-gem text-gold text-xl"></i>
           </div>
           <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Luxury Craftsmanship</h3>
-          <p class="text-t1 text-sm text-center font-inter">Superior planning, premium execution standards, and thoughtful community design for lasting value.</p>
+          <p class="text-t1 text-sm text-center font-inter">Superior planning, premium execution standards, and
+            thoughtful community design for lasting value.</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+          <div
+            class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
             <i class="fas fa-clock text-gold text-xl"></i>
           </div>
           <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Timely Excellence</h3>
-          <p class="text-t1 text-sm text-center font-inter">Punctual delivery with consistent quality checks—your plans stay on track.</p>
+          <p class="text-t1 text-sm text-center font-inter">Punctual delivery with consistent quality checks—your plans
+            stay on track.</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+          <div
+            class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
             <i class="fas fa-handshake text-gold text-xl"></i>
           </div>
           <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Personalized Service</h3>
-          <p class="text-t1 text-sm text-center font-inter">White-glove guidance from enquiry to registration—simple, responsive, and honest.</p>
+          <p class="text-t1 text-sm text-center font-inter">White-glove guidance from enquiry to registration—simple,
+            responsive, and honest.</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+          <div
+            class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
             <i class="fas fa-map-marker-alt text-gold text-xl"></i>
           </div>
           <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Prime Locations</h3>
-          <p class="text-t1 text-sm text-center font-inter">Carefully selected growth corridors with strong connectivity and infrastructure potential.</p>
+          <p class="text-t1 text-sm text-center font-inter">Carefully selected growth corridors with strong connectivity
+            and infrastructure potential.</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
-          <div class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
+          <div
+            class="w-14 h-14 bg-gold/15 border border-gold/25 rounded-2xl flex items-center justify-center mb-5 mx-auto">
             <i class="fas fa-trophy text-gold text-xl"></i>
           </div>
           <h3 class="text-lg font-playfair font-medium text-t0 mb-3 text-center">Trusted Brand</h3>
-          <p class="text-t1 text-sm text-center font-inter">Built on referrals, quality-first delivery, and consistent client satisfaction.</p>
+          <p class="text-t1 text-sm text-center font-inter">Built on referrals, quality-first delivery, and consistent
+            client satisfaction.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS (unchanged) -->
+  <!-- PROJECTS -->
   <section id="projects" class="section-padding relative">
     <div class="container mx-auto px-4">
       <div class="text-center mb-14 animate-on-scroll">
-        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">Our <span class="gradient-text">Projects</span></h2>
-        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">Premium plotting developments designed for lifestyle, connectivity, and long-term appreciation.</p>
+        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">Our <span
+            class="gradient-text">Projects</span></h2>
+        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">Premium plotting developments designed for lifestyle,
+          connectivity, and long-term appreciation.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <a href="chandanavana-rashrakuta.html">
           <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-            <img src="./images/sandaltreechnadnavana.jpg" alt="Rastrakuta Chandanavana Sandalwood Farm Plots" class="w-full h-48 object-cover opacity-90" />
+            <img src="./images/sandaltreechnadnavana.jpg" alt="Rastrakuta Chandanavana Sandalwood Farm Plots"
+              class="w-full h-48 object-cover opacity-90" />
             <div class="p-6">
               <div class="flex items-center justify-between mb-2">
                 <h3 class="text-lg text-t0 font-playfair font-medium">Rastrakuta Chandanavana</h3>
-                <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Sandalwood Farm Plots</span>
+                <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Sandalwood
+                  Farm Plots</span>
               </div>
-              <p class="text-t1 mb-4 font-inter text-sm">Premium sandalwood farm plots designed for long-term wealth creation.</p>
+              <p class="text-t1 mb-4 font-inter text-sm">Premium sandalwood farm plots designed for long-term wealth
+                creation.</p>
               <div class="flex items-center justify-between text-xs text-t2">
                 <span><i class="fa-solid fa-seedling mr-2 text-gold"></i>Managed Plantation</span>
                 <span><i class="fa-solid fa-chart-line mr-2 text-gold"></i>High-Value Investment</span>
@@ -400,13 +513,16 @@
         </a>
 
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="https://www.santiamestates.com/blog/admin/assets/img/post/image_2025-04-30-12-43-48_68121b0442490.jpg" alt="Ayodhya Badavane" class="w-full h-48 object-cover opacity-90" />
+          <img
+            src="https://www.santiamestates.com/blog/admin/assets/img/post/image_2025-04-30-12-43-48_68121b0442490.jpg"
+            alt="Ayodhya Badavane" class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-lg font-playfair font-medium text-t0">Ayodhya Badavane</h3>
               <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Layout</span>
             </div>
-            <p class="text-t1 mb-4 font-inter text-sm">A peaceful layout with well-planned plots, good roads, and all basic facilities for comfortable living.</p>
+            <p class="text-t1 mb-4 font-inter text-sm">A peaceful layout with well-planned plots, good roads, and all
+              basic facilities for comfortable living.</p>
             <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-road mr-2 text-gold"></i>Wide Roads</span>
               <span><i class="fa-solid fa-file-shield mr-2 text-gold"></i>Clear Docs</span>
@@ -421,7 +537,8 @@
               <h3 class="text-lg font-playfair font-medium text-t0">Kundhana • Devanahalli</h3>
               <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Plots</span>
             </div>
-            <p class="text-t1 mb-4 font-inter text-sm">A well-planned layout with spacious plots and basic facilities in Kundhana, near Devanahalli.</p>
+            <p class="text-t1 mb-4 font-inter text-sm">A well-planned layout with spacious plots and basic facilities in
+              Kundhana, near Devanahalli.</p>
             <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-location-dot mr-2 text-gold"></i>Near Airport Belt</span>
               <span><i class="fa-solid fa-tree-city mr-2 text-gold"></i>Open Spaces</span>
@@ -430,13 +547,16 @@
         </div>
 
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="https://5.imimg.com/data5/SELLER/Default/2024/2/394674348/JO/QK/CZ/33658789/residential-land-for-sale-1000x1000.jpeg" alt="Rajankunte" class="w-full h-48 object-cover opacity-90" />
+          <img
+            src="https://5.imimg.com/data5/SELLER/Default/2024/2/394674348/JO/QK/CZ/33658789/residential-land-for-sale-1000x1000.jpeg"
+            alt="Rajankunte" class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-lg font-playfair font-medium text-t0">Rajankunte</h3>
               <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Layout</span>
             </div>
-            <p class="text-t1 mb-4 font-inter text-sm">A peaceful residential layout with well-planned plots and all basic facilities in Rajankunte.</p>
+            <p class="text-t1 mb-4 font-inter text-sm">A peaceful residential layout with well-planned plots and all
+              basic facilities in Rajankunte.</p>
             <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-house-chimney mr-2 text-gold"></i>Residential Zone</span>
               <span><i class="fa-solid fa-wifi mr-2 text-gold"></i>Connectivity</span>
@@ -445,13 +565,15 @@
         </div>
 
         <div class="card-hover marble rounded-2xl shadow-soft overflow-hidden animate-on-scroll">
-          <img src="https://files.propertywala.com/photos/8d/P762946405.default.22108045.jpg" alt="Gauribidanur" class="w-full h-48 object-cover opacity-90" />
+          <img src="https://files.propertywala.com/photos/8d/P762946405.default.22108045.jpg" alt="Gauribidanur"
+            class="w-full h-48 object-cover opacity-90" />
           <div class="p-6">
             <div class="flex items-center justify-between mb-2">
               <h3 class="text-lg font-playfair font-medium text-t0">Gauribidanur</h3>
               <span class="text-[10px] px-3 py-1 rounded-full border border-gold/25 text-gold bg-gold/10">Plots</span>
             </div>
-            <p class="text-t1 mb-4 font-inter text-sm">A well-planned residential layout with clear plots and good basic facilities in Gauribidanur.</p>
+            <p class="text-t1 mb-4 font-inter text-sm">A well-planned residential layout with clear plots and good basic
+              facilities in Gauribidanur.</p>
             <div class="flex items-center justify-between text-xs text-t2">
               <span><i class="fa-solid fa-seedling mr-2 text-gold"></i>Growth Corridor</span>
               <span><i class="fa-solid fa-shield-heart mr-2 text-gold"></i>Peaceful Living</span>
@@ -465,13 +587,16 @@
             <div class="relative z-10 max-w-4xl mx-auto">
               <h3 class="cta-title text-xl md:text-2xl text-t0">Want the Latest Inventory & Site Visit Slots</h3>
               <p class="cta-subtitle text-t1 mt-3">
-                Get a curated list of available plots, pricing ranges, and documentation checklist — delivered directly on WhatsApp.
+                Get a curated list of available plots, pricing ranges, and documentation checklist — delivered directly
+                on WhatsApp.
               </p>
               <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" class="inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-7 py-3.5 rounded-xl font-medium transition-all shadow-glow text-sm sm:text-base">
+                <a href="#contact"
+                  class="inline-flex items-center justify-center bg-gold hover:bg-gold2 text-ink px-7 py-3.5 rounded-xl font-medium transition-all shadow-glow text-sm sm:text-base">
                   Request Details <i class="fa-solid fa-paper-plane ml-2"></i>
                 </a>
-                <a href="#contact" class="inline-flex items-center justify-center glass-dark px-7 py-3.5 rounded-xl font-medium text-t0 hover:border-gold/40 transition-all text-sm sm:text-base">
+                <a href="#contact"
+                  class="inline-flex items-center justify-center glass-dark px-7 py-3.5 rounded-xl font-medium text-t0 hover:border-gold/40 transition-all text-sm sm:text-base">
                   Book a Site Visit <i class="fa-solid fa-calendar-check ml-2"></i>
                 </a>
               </div>
@@ -483,40 +608,63 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS (unchanged) -->
+  <!-- TESTIMONIALS -->
   <section id="testimonials" class="section-padding relative pillars-bg noise">
     <div class="container mx-auto px-4 relative z-10">
       <div class="text-center mb-14 animate-on-scroll">
-        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">Client <span class="gradient-text">Testimonials</span></h2>
-        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">Trusted by clients who value transparency, premium quality, and a smooth buying experience.</p>
+        <h2 class="text-3xl md:text-4xl font-playfair font-semibold text-t0 mb-3">Client <span
+            class="gradient-text">Testimonials</span></h2>
+        <p class="text-t1 text-base max-w-2xl mx-auto font-inter">Trusted by clients who value transparency, premium
+          quality, and a smooth buying experience.</p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
           <div class="flex items-center mb-5">
-            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Arjun Mehta" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
-            <div><h4 class="font-medium text-t0 font-inter text-sm">Arjun Mehta</h4><p class="text-t2 text-xs">CEO, Tech Innovations</p></div>
+            <img
+              src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+              alt="Arjun Mehta" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
+            <div>
+              <h4 class="font-medium text-t0 font-inter text-sm">Arjun Mehta</h4>
+              <p class="text-t2 text-xs">CEO, Tech Innovations</p>
+            </div>
           </div>
-          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-t1 font-inter text-sm">“Super professional process and documentation. The team is transparent and supportive from visit to registration.”</p>
+          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+              class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="text-t1 font-inter text-sm">“Super professional process and documentation. The team is transparent
+            and supportive from visit to registration.”</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
           <div class="flex items-center mb-5">
-            <img src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Kavya Sharma" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
-            <div><h4 class="font-medium text-t0 font-inter text-sm">Kavya Sharma</h4><p class="text-t2 text-xs">Investment Banker</p></div>
+            <img
+              src="https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+              alt="Kavya Sharma" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
+            <div>
+              <h4 class="font-medium text-t0 font-inter text-sm">Kavya Sharma</h4>
+              <p class="text-t2 text-xs">Investment Banker</p>
+            </div>
           </div>
-          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-t1 font-inter text-sm">“Great guidance and excellent location recommendations. Clear documentation and genuine support throughout.”</p>
+          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+              class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="text-t1 font-inter text-sm">“Great guidance and excellent location recommendations. Clear
+            documentation and genuine support throughout.”</p>
         </div>
 
         <div class="card-hover marble p-7 rounded-2xl shadow-soft animate-on-scroll">
           <div class="flex items-center mb-5">
-            <img src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop" alt="Rohit Gupta" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
-            <div><h4 class="font-medium text-t0 font-inter text-sm">Rohit Gupta</h4><p class="text-t2 text-xs">Senior Advocate</p></div>
+            <img
+              src="https://images.pexels.com/photos/1040880/pexels-photo-1040880.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+              alt="Rohit Gupta" class="w-12 h-12 rounded-full mr-4 border border-white/10" />
+            <div>
+              <h4 class="font-medium text-t0 font-inter text-sm">Rohit Gupta</h4>
+              <p class="text-t2 text-xs">Senior Advocate</p>
+            </div>
           </div>
-          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-          <p class="text-t1 font-inter text-sm">“Impeccable documentation and quality. A clean, trustworthy process—exactly what buyers need.”</p>
+          <div class="flex mb-4 gap-1 text-gold text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+              class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p class="text-t1 font-inter text-sm">“Impeccable documentation and quality. A clean, trustworthy
+            process—exactly what buyers need.”</p>
         </div>
       </div>
     </div>
@@ -562,7 +710,8 @@
 
             <div class="glass-dark rounded-2xl p-5">
               <div class="flex items-start gap-3">
-                <div class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center mt-0.5">
+                <div
+                  class="w-11 h-11 rounded-xl bg-gold/15 border border-gold/25 flex items-center justify-center mt-0.5">
                   <i class="fa-solid fa-location-dot text-gold"></i>
                 </div>
                 <div>
@@ -578,7 +727,7 @@
           </div>
         </div>
 
-        <!-- ✅ FORM (updated) -->
+        <!-- FORM -->
         <div class="animate-on-scroll">
           <div class="marble rounded-2xl shadow-soft p-7 relative overflow-hidden h-full flex flex-col">
             <div class="absolute inset-0 noise"></div>
@@ -587,51 +736,37 @@
               <h3 class="text-xl font-playfair font-medium text-t0">Enquiry Form</h3>
               <p class="text-t2 mt-2 text-sm">We’ll call you back within 24 hours.</p>
 
-              <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm">
+              <!-- ✅ Hidden iframe to bypass CORS -->
+              <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+
+              <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm" target="hidden_iframe">
                 <div>
                   <label class="text-t2 text-sm">Full Name</label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="name"
-                    required
+                  <input type="text" id="fullName" name="fullName" required
                     class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
-                    placeholder="Your name"
-                  />
+                    placeholder="Your name" />
                 </div>
 
                 <div class="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label class="text-t2 text-sm">Phone</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
+                    <input type="tel" id="phone" name="phone" required
                       class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
-                      placeholder="+91 XXXXX XXXXX"
-                    />
+                      placeholder="+91 XXXXX XXXXX" />
                   </div>
 
                   <div>
                     <label class="text-t2 text-sm">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
+                    <input type="email" id="email" name="email"
                       class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
-                      placeholder="name@email.com"
-                    />
+                      placeholder="name@email.com" />
                   </div>
                 </div>
 
                 <div>
                   <label class="text-t2 text-sm">Requirement</label>
-                  <select
-                    id="requirement"
-                    name="requirement"
-                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
-                  >
+                  <select id="requirement" name="requirement"
+                    class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm">
                     <option>Villa Plot</option>
                     <option>Residential Layout Plot</option>
                     <option>Farm Plot</option>
@@ -640,14 +775,8 @@
                   </select>
                 </div>
 
-                <!-- Status message -->
-                <div id="formStatus" class="hidden text-sm rounded-xl px-4 py-3 border"></div>
-
-                <button
-                  type="submit"
-                  id="submitBtn"
-                  class="mt-auto w-full shimmer-line bg-gold hover:bg-gold2 text-ink px-6 py-3.5 rounded-xl font-medium text-base transition-all shadow-glow inline-flex items-center justify-center gap-2"
-                >
+                <button type="submit" id="submitBtn"
+                  class="mt-auto w-full shimmer-line bg-gold hover:bg-gold2 text-ink px-6 py-3.5 rounded-xl font-medium text-base transition-all shadow-glow inline-flex items-center justify-center gap-2">
                   <span id="btnText">Submit Enquiry</span>
                   <i id="btnIcon" class="fa-solid fa-arrow-right"></i>
                   <i id="btnSpinner" class="fa-solid fa-circle-notch fa-spin hidden"></i>
@@ -669,34 +798,28 @@
             <i class="fa-solid fa-map-location-dot text-gold"></i> Google Map Location
           </div>
           <div class="w-full h-[300px] md:h-[360px]">
-            <iframe
-              class="w-full h-full"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+            <iframe class="w-full h-full" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               src="https://www.google.com/maps?q=%2314%2C%201st%20floor%2C%206A%20cross%20road%2C%20Talacauvery%20layout%2C%20Amruthalli%20Road%2C%20Sahakara%20Nagar%20post%2C%20Bengaluru%20560092&output=embed">
             </iframe>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- FOOTER (unchanged) -->
+  <!-- FOOTER -->
   <footer class="bg-[#06080D] text-t1 py-12 border-t border-white/10">
     <div class="container mx-auto px-4">
       <div class="grid md:grid-cols-4 gap-8">
         <div>
           <div class="flex items-center mb-4 space-x-3">
             <div class="flex items-center">
-              <img
-                src="./images/Rastrakuta Logo_20260205_095728_0000.png"
-                alt="Rastrakuta"
-                class="h-12 md:h-14 w-auto object-contain"
-              />
+              <img src="./images/Rastrakuta Logo_20260205_095728_0000.png" alt="Rastrakuta"
+                class="h-12 md:h-14 w-auto object-contain" />
             </div>
           </div>
-          <p class="text-t2 mb-4 font-inter text-sm">Creating premium communities and building lasting relationships through excellence and transparency in real estate development.</p>
+          <p class="text-t2 mb-4 font-inter text-sm">Creating premium communities and building lasting relationships
+            through excellence and transparency in real estate development.</p>
           <div class="flex space-x-4">
             <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-facebook-f text-lg"></i></a>
             <a href="#" class="text-t2 hover:text-gold transition-colors"><i class="fab fa-twitter text-lg"></i></a>
@@ -730,253 +853,286 @@
           <ul class="space-y-4 font-inter text-sm">
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-phone text-gold mt-1"></i>
-              <div><h4 class="font-medium text-t0">+91 9886990006</h4></div>
+              <div>
+                <h4 class="font-medium text-t0">+91 9886990006</h4>
+              </div>
             </li>
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-envelope text-gold mt-1"></i>
-              <div><h4 class="font-medium text-t0">rastrakutainfra@gmail.com</h4></div>
+              <div>
+                <h4 class="font-medium text-t0">rastrakutainfra@gmail.com</h4>
+              </div>
             </li>
             <li class="flex items-start gap-3">
               <i class="fa-solid fa-location-dot text-gold mt-1"></i>
-              <div><h4 class="text-sm font-medium text-t0">#14, 1st floor, 6A cross road, Talacauvery layout, Amruthalli Road, Sahakara Nagar post, Bengaluru 560092</h4></div>
+              <div>
+                <h4 class="text-sm font-medium text-t0">#14, 1st floor, 6A cross road, Talacauvery layout, Amruthalli
+                  Road, Sahakara Nagar post, Bengaluru 560092</h4>
+              </div>
             </li>
           </ul>
         </div>
       </div>
 
       <div class="border-t border-white/10 mt-8 pt-8 text-center">
-        <p class="text-t2 font-inter text-sm">© 2024 Rastrakuta Infra Developers Pvt Ltd. All rights reserved. | Privacy Policy | Terms of Service</p>
+        <p class="text-t2 font-inter text-sm">© 2024 Rastrakuta Infra Developers Pvt Ltd. All rights reserved. | Privacy
+          Policy | Terms of Service</p>
       </div>
     </div>
   </footer>
 
-
-
-  <!-- ✅ Sticky Call & WhatsApp Buttons -->
+  <!-- Sticky Buttons -->
   <div class="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
-    <a
-      href="https://wa.me/919886990006"
-      target="_blank"
+    <a href="https://wa.me/919886990006" target="_blank"
       class="w-11 h-11 flex items-center justify-center rounded-full bg-green-500 text-white shadow-lg hover:scale-105 transition"
-      aria-label="WhatsApp"
-    >
+      aria-label="WhatsApp">
       <i class="fab fa-whatsapp text-lg"></i>
     </a>
 
-    <a
-      href="tel:9886990006"
+    <a href="tel:9886990006"
       class="w-11 h-11 flex items-center justify-center rounded-full bg-gold text-ink shadow-lg hover:scale-105 transition"
-      aria-label="Call Now"
-    >
+      aria-label="Call Now">
       <i class="fa-solid fa-phone text-sm"></i>
     </a>
   </div>
-<!-- UI + Scroll scripts -->
-<script>
-  // ---------- Smooth scroll ----------
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-      if (!href || href === "#") return;
 
-      const target = document.querySelector(href);
-      if (!target) return;
+  <!-- UI + Scroll scripts -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
+      /* ===============================
+         SMOOTH SCROLL
+      =============================== */
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (!href || href === "#") return;
 
-  // ---------- Navbar scroll effect ----------
-  const navbar = document.getElementById("navbar");
+          const target = document.querySelector(href);
+          if (!target) return;
 
-  function setNav() {
-    if (!navbar) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
 
-    if (window.scrollY > 30) {
-      navbar.classList.add("glass-dark", "backdrop-blur-xl");
-      navbar.style.background = "rgba(7,10,15,0.78)";
-      navbar.style.borderBottom = "1px solid rgba(255,255,255,0.08)";
-    } else {
-      navbar.classList.remove("glass-dark", "backdrop-blur-xl");
-      navbar.style.background = "transparent";
-      navbar.style.borderBottom = "1px solid transparent";
-    }
-  }
+      /* ===============================
+         NAVBAR SCROLL EFFECT
+      =============================== */
+      const navbar = document.getElementById("navbar");
+      function setNav() {
+        if (!navbar) return;
 
-  window.addEventListener("scroll", setNav);
-  setNav();
-
-  // ---------- Mobile menu ----------
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const backdrop = document.getElementById("menu-backdrop");
-
-  function openMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.remove("hidden");
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.add("hidden");
-    document.body.style.overflow = "";
-  }
-
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener("click", () => {
-      mobileMenu.classList.contains("hidden") ? openMenu() : closeMenu();
-    });
-  }
-
-  if (backdrop) backdrop.addEventListener("click", closeMenu);
-
-  document.querySelectorAll(".mobile-link").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeMenu();
-  });
-
-  // ---------- Animate on scroll ----------
-  const observerOptions = { threshold: 0.12, rootMargin: "0px 0px -50px 0px" };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) entry.target.classList.add("animate");
-    });
-  }, observerOptions);
-  document.querySelectorAll(".animate-on-scroll").forEach((el) => observer.observe(el));
-
-  // ---------- Scroll progress ----------
-  const scrollProgress = document.createElement("div");
-  scrollProgress.className = "fixed top-0 left-0 h-[2px] bg-gold z-50 transition-all duration-200";
-  scrollProgress.style.width = "0%";
-  scrollProgress.style.opacity = "0";
-  document.body.appendChild(scrollProgress);
-
-  window.addEventListener("scroll", () => {
-    const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-    scrollProgress.style.width = `${scrollPercent}%`;
-    scrollProgress.style.opacity = window.scrollY > 40 ? "1" : "0";
-  });
-
-  // ---------- Back to top ----------
-  const backToTop = document.createElement("button");
-  backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-  backToTop.className =
-    "fixed bottom-8 right-20 bg-gold hover:bg-gold2 text-ink w-11 h-11 rounded-full shadow-glow transition-all duration-300 opacity-0 translate-y-8 z-50";
-  document.body.appendChild(backToTop);
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 320) {
-      backToTop.style.opacity = "1";
-      backToTop.style.transform = "translateY(0)";
-    } else {
-      backToTop.style.opacity = "0";
-      backToTop.style.transform = "translateY(2rem)";
-    }
-  });
-
-  backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
-</script>
-
-<!-- Google Sheet submit -->
-<script>
-  const SHEET_WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbyacwFXK7UWHdyEz1E99-T6ONGIVhNe-hkZTKSvYXbJ3r3q5e-9r7zkroGK4QrypfSY/exec";
-
-  const leadForm = document.getElementById("leadForm");
-  const submitBtn = document.getElementById("submitBtn");
-  const btnText = document.getElementById("btnText");
-  const btnIcon = document.getElementById("btnIcon");
-  const btnSpinner = document.getElementById("btnSpinner");
-  const formStatus = document.getElementById("formStatus");
-
-  let isSubmitting = false;
-
-  function setLoading(isLoading) {
-    if (!submitBtn) return;
-
-    submitBtn.disabled = isLoading;
-    submitBtn.classList.toggle("opacity-70", isLoading);
-    submitBtn.classList.toggle("cursor-not-allowed", isLoading);
-
-    if (btnText) btnText.textContent = isLoading ? "Submitting..." : "Submit Enquiry";
-    if (btnIcon) btnIcon.classList.toggle("hidden", isLoading);
-    if (btnSpinner) btnSpinner.classList.toggle("hidden", !isLoading);
-  }
-
-  function showStatus(type, message) {
-    if (!formStatus) return;
-
-    formStatus.classList.remove("hidden");
-    formStatus.textContent = message;
-
-    formStatus.classList.remove("border-green-400/30", "bg-green-500/10", "text-green-200");
-    formStatus.classList.remove("border-red-400/30", "bg-red-500/10", "text-red-200");
-
-    if (type === "success") {
-      formStatus.classList.add("border-green-400/30", "bg-green-500/10", "text-green-200");
-    } else {
-      formStatus.classList.add("border-red-400/30", "bg-red-500/10", "text-red-200");
-    }
-  }
-
-  async function sendToSheet(payload) {
-    const res = await fetch(SHEET_WEB_APP_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    // If Apps Script returns plain text, this will fail.
-    // So we safely try JSON first, else fallback to text.
-    const text = await res.text();
-    try {
-      return JSON.parse(text);
-    } catch {
-      return { status: "error", message: "Non-JSON response: " + text };
-    }
-  }
-
-  if (leadForm) {
-    leadForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (isSubmitting) return;
-
-      isSubmitting = true;
-      setLoading(true);
-      showStatus("success", "⏳ Sending your enquiry...");
-
-      const payload = {
-        page: "index",
-        name: document.getElementById("fullName")?.value?.trim() || "",
-        phone: document.getElementById("phone")?.value?.trim() || "",
-        email: document.getElementById("email")?.value?.trim() || "",
-        requirement: document.getElementById("requirement")?.value || "",
-      };
-
-      try {
-        const out = await sendToSheet(payload);
-
-        if (out.status === "success") {
-          showStatus("success", "✅ Submitted successfully! Our team will contact you soon.");
-          leadForm.reset();
+        if (window.scrollY > 30) {
+          navbar.classList.add("glass-dark", "backdrop-blur-xl");
+          navbar.style.background = "rgba(7,10,15,0.78)";
+          navbar.style.borderBottom = "1px solid rgba(255,255,255,0.08)";
         } else {
-          showStatus("error", "❌ Submission failed: " + (out.message || "Unknown error"));
+          navbar.classList.remove("glass-dark", "backdrop-blur-xl");
+          navbar.style.background = "transparent";
+          navbar.style.borderBottom = "1px solid transparent";
         }
-      } catch (err) {
-        showStatus("error", "❌ Network error: " + (err.message || "Failed to fetch"));
-      } finally {
-        setLoading(false);
-        isSubmitting = false;
       }
-    });
-  }
-</script>
+      window.addEventListener("scroll", setNav);
+      setNav();
 
-  
+      /* ===============================
+         MOBILE MENU
+      =============================== */
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const backdrop = document.getElementById("menu-backdrop");
+
+      function openMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
+
+      mobileMenuBtn?.addEventListener("click", () => {
+        mobileMenu.classList.contains("hidden") ? openMenu() : closeMenu();
+      });
+
+      backdrop?.addEventListener("click", closeMenu);
+      document.querySelectorAll(".mobile-link").forEach(link =>
+        link.addEventListener("click", closeMenu)
+      );
+
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closeMenu();
+      });
+
+      /* ===============================
+         ANIMATE ON SCROLL
+      =============================== */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("animate");
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -50px 0px" });
+
+      document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+
+      /* ===============================
+         LEAD FORM – COMPLETE & RELIABLE
+         (works with hidden iframe + Swal)
+      =============================== */
+      const GOOGLE_SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycby0m3I9InghH2VZ2A7vuM9gUeZLqj3qzuAwJ4q0uyRSUjmp09NZdGeXGjLGEw8r9qImvg/exec"
+      const form = document.getElementById("leadForm");
+      const iframe = document.getElementById("hidden_iframe");
+
+      const submitBtn = document.getElementById("submitBtn");
+      const btnText = document.getElementById("btnText");
+      const btnIcon = document.getElementById("btnIcon");
+      const btnSpinner = document.getElementById("btnSpinner");
+
+      if (!form || !iframe) {
+        console.error("Form or iframe not found");
+      } else {
+        // IMPORTANT: target must match iframe name
+        form.action = GOOGLE_SCRIPT_URL;
+        form.method = "POST";
+        form.target = "hidden_iframe";
+
+        let isSubmitting = false;
+        let fallbackTimer = null;
+
+        function setLoading(on) {
+          if (!submitBtn) return;
+          submitBtn.disabled = on;
+
+          if (btnText) btnText.textContent = on ? "Submitting..." : "Submit Enquiry";
+          if (btnIcon) btnIcon.classList.toggle("hidden", on);
+          if (btnSpinner) btnSpinner.classList.toggle("hidden", !on);
+        }
+
+        function fireSuccess() {
+          if (window.Swal) {
+            Swal.fire({
+              icon: "success",
+              title: "Enquiry Sent!",
+              text: "We’ll call you back within 24 hours.",
+              confirmButtonColor: "#B8860B",
+            });
+          } else {
+            alert("Enquiry Sent! We’ll call you back within 24 hours.");
+          }
+        }
+
+        function fireError() {
+          if (window.Swal) {
+            Swal.fire({
+              icon: "error",
+              title: "Submission Failed",
+              text: "Network issue. Please try again or call us directly.",
+              confirmButtonColor: "#B8860B",
+            });
+          } else {
+            alert("Submission Failed. Please try again.");
+          }
+        }
+
+        function onLoad() {
+          // iframe load can happen initially; only treat as success while submitting
+          if (!isSubmitting) return;
+
+          clearTimeout(fallbackTimer);
+          isSubmitting = false;
+          setLoading(false);
+
+          // close loading modal if open
+          if (window.Swal && Swal.isVisible()) Swal.close();
+
+          form.reset();
+          fireSuccess();
+        }
+
+        iframe.addEventListener("load", onLoad);
+
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          if (isSubmitting) return;
+
+          isSubmitting = true;
+          setLoading(true);
+
+          if (window.Swal) {
+            Swal.fire({
+              title: "Submitting...",
+              text: "Please wait",
+              allowOutsideClick: false,
+              allowEscapeKey: false,
+              didOpen: () => Swal.showLoading(),
+            });
+          }
+
+          // ✅ DEBUG
+          console.log("Submitting to:", form.action);
+          console.log("Form data:", Array.from(new FormData(form).entries()));
+
+          // submit to Apps Script via hidden iframe
+          form.submit();
+
+          // fallback timeout
+          fallbackTimer = setTimeout(() => {
+            if (!isSubmitting) return;
+
+            iframe.removeEventListener("load", onLoad);
+            if (window.Swal && Swal.isVisible()) Swal.close();
+
+            fireError();
+            setLoading(false);
+            isSubmitting = false;
+
+            // reattach for next submit attempt
+            iframe.addEventListener("load", onLoad);
+          }, 15000);
+        });
+      }
+
+      /* ===============================
+         SCROLL PROGRESS BAR
+      =============================== */
+      const scrollBar = document.createElement("div");
+      scrollBar.className = "fixed top-0 left-0 h-[2px] bg-gold z-50";
+      scrollBar.style.width = "0%";
+      scrollBar.style.opacity = "0";
+      document.body.appendChild(scrollBar);
+
+      window.addEventListener("scroll", () => {
+        const percent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        scrollBar.style.width = percent + "%";
+        scrollBar.style.opacity = window.scrollY > 40 ? "1" : "0";
+      });
+
+      /* ===============================
+         BACK TO TOP
+      =============================== */
+      const backToTop = document.createElement("button");
+      backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+      backToTop.className =
+        "fixed bottom-8 right-20 bg-gold hover:bg-gold2 text-ink w-11 h-11 rounded-full shadow-glow opacity-0 translate-y-8 transition z-50";
+      document.body.appendChild(backToTop);
+
+      window.addEventListener("scroll", () => {
+        backToTop.style.opacity = window.scrollY > 320 ? "1" : "0";
+        backToTop.style.transform = window.scrollY > 320 ? "translateY(0)" : "translateY(2rem)";
+      });
+
+      backToTop.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
+    });
+  </script>
+
 </body>
+
 </html>
