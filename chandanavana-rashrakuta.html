@@ -56,6 +56,13 @@
     /* NAV hide on scroll */
     #navbar{transition:transform .28s ease, opacity .28s ease}
     #navbar.nav-hidden{transform:translateY(-110%);opacity:0}
+
+    .hl-card{background:#2E7D32;border:1px solid rgba(255,255,255,.35);border-radius:16px;padding:28px 20px;text-align:center;color:#fff;min-height:190px;display:flex;flex-direction:column;justify-content:center;transition:all .3s ease}
+    .hl-card:hover{background:#388E3C;transform:translateY(-4px)}
+    .hl-icon{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 14px}
+    .hl-card h4{font-size:15px;font-weight:600;margin-bottom:4px}
+    .hl-card p{font-size:12px;color:rgba(255,255,255,.85)}
+
   </style>
 </head>
 
@@ -587,7 +594,32 @@
       </div>
     </div>
   </section>
+  <!-- HIGHLIGHTS -->
+  <section id="highlights" class="py-20 bg-[#1B5E20]">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-cinzel text-white">Project Highlights</h2>
+        <p class="mt-2 text-white/80 text-sm">12 thoughtfully designed community & nature experiences.</p>
+      </div>
 
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-house"></i></div><h4>Vruksha Sabha</h4><p>The Community Core</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-utensils"></i></div><h4>Anna Kutira</h4><p>Shared Kitchen & Dining</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-person-praying"></i></div><h4>Quiet Spaces</h4><p>Daily Stillness</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-chess"></i></div><h4>Bala Kutira</h4><p>Children’s Nature Zone</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-route"></i></div><h4>Maati Patha</h4><p>Earthen Walking Trails</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-tree"></i></div><h4>Shanti Vanam</h4><p>Wellness Grove</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-book-open"></i></div><h4>Vanantara</h4><p>Outdoor Reading Garden</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-fire"></i></div><h4>Kampu Sthaana</h4><p>Bonfire & Conversations</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-people-group"></i></div><h4>Shrishti Angana</h4><p>Amphitheatre Lawn</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-house-chimney"></i></div><h4>Mannina Mane</h4><p>Earthen Farmhouses</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-spa"></i></div><h4>Bamboo Pavilion</h4><p>Yoga & Reflection Hall</p></div>
+
+        <!-- NEW (12th) -->
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-water"></i></div><h4>Jala Kuteera</h4><p>Waterbody & Calm Deck</p></div>
+      </div>
+    </div>
+  </section>
   <!-- GALLERY -->
   <section id="gallery" class="section-padding bg-white">
     <div class="container mx-auto px-4">
@@ -600,14 +632,11 @@
 
       <div class="mt-10 grid grid-cols-2 md:grid-cols-3 gap-5">
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img1.jpg"  alt="Gallery 1"></div>
-        <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img2.jpg"  alt="Gallery 2"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img3.jpg"  alt="Gallery 3"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img4.jpg"  alt="Gallery 4"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img5.jpg"  alt="Gallery 5"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img6.jpg"  alt="Gallery 6"></div>
-        <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img7.jpg"  alt="Gallery 7"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img8.jpg"  alt="Gallery 8"></div>
-        <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img9.jpg"  alt="Gallery 9"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img10.jpg" alt="Gallery 10"></div>
         <div class="img-card paper shadow-soft md:col-span-1 col-span-2">
           <img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img11.jpg" alt="Gallery 11">
@@ -616,41 +645,67 @@
     </div>
   </section>
 
-  <!-- PRE-LAUNCH ADVANTAGE -->
-  <section id="prelaunch-advantage" class="py-16 md:py-20 bg-bg1">
-    <div class="w-full px-4 sm:px-6 lg:px-10">
-      <div class="paper rounded-2xl shadow-soft p-6 sm:p-8 md:p-10">
 
-        <div class="flex items-center gap-3">
-          <div class="w-12 h-12 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
-            <i class="fa-solid fa-rocket"></i>
-          </div>
-          <h3 class="text-2xl md:text-4xl font-cinzel font-medium text-t0">Pre-Launch Advantage</h3>
+<!-- =========================
+     PRE-LAUNCH ADVANTAGE (BG IMAGE)
+========================== -->
+<section id="prelaunch-advantage"
+  class="relative py-16 md:py-24 bg-center bg-no-repeat bg-cover"
+  style="background-image: url('./images/img7.jpg');">
+
+  <!-- Dark Overlay -->
+  <div class="absolute inset-0 bg-black/55"></div>
+
+  <div class="relative z-10 w-full px-4 sm:px-6 lg:px-10">
+    <div class="paper bg-white/90 backdrop-blur rounded-2xl shadow-soft p-6 sm:p-8 md:p-10 max-w-5xl mx-auto">
+
+      <!-- Header -->
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-[#2E7D32]/15 border border-[#2E7D32]/30 flex items-center justify-center text-[#2E7D32]">
+          <i class="fa-solid fa-rocket"></i>
         </div>
-
-        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="bg-white rounded-xl border border-[#2E7D32]/15 p-5 text-sm text-t1">Priority plot selection</div>
-          <div class="bg-white rounded-xl border border-[#2E7D32]/15 p-5 text-sm text-t1">Attractive pre-launch pricing</div>
-          <div class="bg-white rounded-xl border border-[#2E7D32]/15 p-5 text-sm text-t1">Early-stage appreciation benefits</div>
-        </div>
-
-        <div class="mt-6 text-sm italic text-[#2E7D32]">
-          Once planted, forests only grow — entry prices grow with them.
-        </div>
-
-        <div class="mt-10 text-center">
-          <div class="text-lg md:text-2xl font-cinzel text-[#1B5E20]">
-            Where Sandalwood Grows. Where Wealth Lives. Where Legacy Begins.
-          </div>
-          <button type="button" data-open-modal="leadModal"
-            class="mt-5 inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-medium bg-[#2E7D32] hover:bg-[#1B5E20] text-white shadow-glow transition">
-            Enquire for Pre-Launch <i class="fa-solid fa-arrow-right ml-2"></i>
-          </button>
-        </div>
-
+        <h3 class="text-2xl md:text-4xl font-cinzel font-medium text-t0">
+          Pre-Launch Advantage
+        </h3>
       </div>
+
+      <!-- Benefits -->
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
+          Priority plot selection
+        </div>
+        <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
+          Attractive pre-launch pricing
+        </div>
+        <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
+          Early-stage appreciation benefits
+        </div>
+      </div>
+
+      <!-- Quote -->
+      <div class="mt-6 text-sm italic text-[#2E7D32] text-center">
+        Once planted, forests only grow — entry prices grow with them.
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-10 text-center">
+        <div class="text-lg md:text-2xl font-cinzel text-[#1B5E20]">
+          Where Sandalwood Grows. Where Wealth Lives. Where Legacy Begins.
+        </div>
+
+        <button
+          type="button"
+          data-open-modal="leadModal"
+          class="mt-6 inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-medium bg-[#2E7D32] hover:bg-[#1B5E20] text-white shadow-glow transition">
+          Enquire for Pre-Launch
+          <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
+
 
   <section id="developer" class="section-padding bg-bg1">
     <div class="container mx-auto px-4">
