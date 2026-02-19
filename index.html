@@ -728,7 +728,7 @@
               <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm" target="hidden_iframe">
                 <div>
                   <label class="text-t2 text-sm">Full Name</label>
-                  <input type="text" id="fullName" name="fullName" required
+                  <input type="text" id="fullName" name="name" required
                     class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm"
                     placeholder="Your name" />
                 </div>
@@ -751,7 +751,7 @@
 
                 <div>
                   <label class="text-t2 text-sm">Requirement</label>
-                  <select id="requirement" name="requirement"
+                  <select id="requirements" name="message"
                     class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm">
                     <option>Villa Plot</option>
                     <option>Residential Layout Plot</option>
@@ -1104,8 +1104,7 @@
        LEAD FORM – GOOGLE APPS SCRIPT
     =============================== */
     const GOOGLE_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycby0m3I9InghH2VZ2A7vuM9gUeZLqj3qzuAwJ4q0uyRSUjmp09NZdGeXGjLGEw8r9qImvg/exec";
-
+"https://script.google.com/macros/s/AKfycbwOLM8WdbKStphMIQqOZvf0NhPDr-sKOVF6cRncGQTNrFD1AT3vpjpwCB22B9Zhhp4K/exec"
     const form = document.getElementById("leadForm");
     const iframe = document.getElementById("hidden_iframe");
     const submitBtn = document.getElementById("submitBtn");

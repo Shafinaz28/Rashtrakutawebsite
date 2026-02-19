@@ -1044,150 +1044,243 @@
     </a>
   </div>
 
-  <script>
-    // -----------------------------
-    // Lead Modal open/close
-    // -----------------------------
-    function openModal(id){
-      const el=document.getElementById(id); if(!el) return;
-      el.classList.remove("hidden"); document.body.classList.add("no-scroll");
-    }
-    function closeModal(id){
-      const el=document.getElementById(id); if(!el) return;
-      el.classList.add("hidden"); document.body.classList.remove("no-scroll");
-    }
-    document.querySelectorAll("[data-close-modal]").forEach(btn=>{
-      btn.addEventListener("click",()=>closeModal(btn.getAttribute("data-close-modal")));
-    });
+<script>
+  // -----------------------------
+  // Lead Modal open/close
+  // -----------------------------
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove("hidden");
+    document.body.classList.add("no-scroll");
+  }
 
-    // Set config/area (kept for UI only; NOT sent to sheet)
-    const cfgField=document.getElementById("cfgField");
-    const areaField=document.getElementById("areaField");
-    document.querySelectorAll('[data-open-modal="leadModal"]').forEach(btn=>{
-      btn.addEventListener("click",()=>{
-        const cfg=btn.getAttribute("data-config")||"";
-        const area=btn.getAttribute("data-area")||"";
-        if(cfgField) cfgField.value=cfg;
-        if(areaField) areaField.value=area;
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add("hidden");
+    document.body.classList.remove("no-scroll");
+  }
+
+  document.querySelectorAll("[data-close-modal]").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      closeModal(btn.getAttribute("data-close-modal"))
+    );
+  });
+
+  // Set config/area (UI only; not sent)
+  const cfgField = document.getElementById("cfgField");
+  const areaField = document.getElementById("areaField");
+
+  document
+    .querySelectorAll('[data-open-modal="leadModal"]')
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const cfg = btn.getAttribute("data-config") || "";
+        const area = btn.getAttribute("data-area") || "";
+        if (cfgField) cfgField.value = cfg;
+        if (areaField) areaField.value = area;
         openModal("leadModal");
       });
     });
 
-    // Close lead modal on ESC
-    document.addEventListener("keydown",(e)=>{ if(e.key==="Escape") closeModal("leadModal"); });
+  // Close lead modal on ESC
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal("leadModal");
+  });
 
-    // ✅ Google Sheet Web App URL
-    const SHEET_WEBAPP_URL="https://script.google.com/macros/s/AKfycby0m3I9InghH2VZ2A7vuM9gUeZLqj3qzuAwJ4q0uyRSUjmp09NZdGeXGjLGEw8r9qImvg/exec";
+  // -----------------------------
+  // ✅ SweetAlert Loading (Submitting...)
+  // -----------------------------
+  function showSubmitting() {
+    if (!window.Swal) return;
+    Swal.fire({
+      title: "Submitting...",
+      text: "Please wait while we save your details",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+  }
 
-    // ✅ SEND ONLY 5 FIELDS: timestamp, name, phone, email, message
-    // (timestamp is generated inside Apps Script)
-    async function postToSheet(formEl){
-      const fd = new FormData();
-      fd.append("name", (formEl.querySelector('[name="name"]')?.value || "").trim());
-      fd.append("phone", (formEl.querySelector('[name="phone"]')?.value || "").trim());
-      fd.append("email", (formEl.querySelector('[name="email"]')?.value || "").trim());
-      fd.append("message", (formEl.querySelector('[name="message"]')?.value || "").trim());
+  // -----------------------------
+  // ✅ Google Sheet Web App URL (same for BOTH forms)
+  // -----------------------------
+  const SHEET_WEBAPP_URL =
+"https://script.google.com/macros/s/AKfycbwOLM8WdbKStphMIQqOZvf0NhPDr-sKOVF6cRncGQTNrFD1AT3vpjpwCB22B9Zhhp4K/exec"
+  // ✅ SEND ONLY 4 FIELDS: name, phone, email, message
+  // (timestamp generated inside Apps Script)
+  async function postToSheet(formEl) {
+    const fd = new FormData();
+    fd.append("name", (formEl.querySelector('[name="name"]')?.value || "").trim());
+    fd.append("phone", (formEl.querySelector('[name="phone"]')?.value || "").trim());
+    fd.append("email", (formEl.querySelector('[name="email"]')?.value || "").trim());
+    fd.append("message", (formEl.querySelector('[name="message"]')?.value || "").trim());
 
-      // Keep no-cors (works on static hosting without CORS setup)
-      await fetch(SHEET_WEBAPP_URL, { method:"POST", body: fd, mode:"no-cors" });
-    }
+    // no-cors works for static hosting
+    await fetch(SHEET_WEBAPP_URL, {
+      method: "POST",
+      body: fd,
+      mode: "no-cors",
+    });
+  }
 
-    // Lead form submit (Modal)
-    const leadForm=document.getElementById("leadForm");
-    leadForm?.addEventListener("submit",async function(e){
-      e.preventDefault();
+  // -----------------------------
+  // ✅ Lead form submit (Modal)
+  // -----------------------------
+  const leadForm = document.getElementById("leadForm");
+  leadForm?.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    try {
+      if (window.Swal) showSubmitting();
+
       await postToSheet(this);
 
-      if(window.Swal){
-        Swal.fire({icon:"success",title:"Submitted!",text:"We will contact you shortly.",confirmButtonColor:"#2E7D32"});
-      } else { alert("✅ Submitted!"); }
+      if (window.Swal) {
+        Swal.fire({
+          icon: "success",
+          title: "Submitted!",
+          text: "We will contact you shortly.",
+          confirmButtonColor: "#2E7D32",
+        });
+      } else {
+        alert("✅ Submitted!");
+      }
 
       this.reset();
       closeModal("leadModal");
-    });
+    } catch (err) {
+      console.error(err);
+      if (window.Swal) {
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong",
+          text: "Please try again in a moment.",
+          confirmButtonColor: "#2E7D32",
+        });
+      } else {
+        alert("❌ Something went wrong. Please try again.");
+      }
+    }
+  });
 
-    // Contact form submit (Contact section)
-    const contactForm=document.getElementById("contactForm");
-    contactForm?.addEventListener("submit",async function(e){
-      e.preventDefault();
+  // -----------------------------
+  // ✅ Contact form submit (Contact section)
+  // -----------------------------
+  const contactForm = document.getElementById("contactForm");
+  contactForm?.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    try {
+      if (window.Swal) showSubmitting();
+
       await postToSheet(this);
 
-      if(window.Swal){
-        Swal.fire({icon:"success",title:"Submitted!",text:"We will contact you shortly.",confirmButtonColor:"#2E7D32"});
-      } else { alert("✅ Submitted!"); }
+      if (window.Swal) {
+        Swal.fire({
+          icon: "success",
+          title: "Submitted!",
+          text: "We will contact you shortly.",
+          confirmButtonColor: "#2E7D32",
+        });
+      } else {
+        alert("✅ Submitted!");
+      }
 
       this.reset();
-    });
-
-    // -----------------------------
-    // Image lightbox
-    // -----------------------------
-    const imgModal=document.getElementById("imgModal");
-    const imgModalTarget=document.getElementById("imgModalTarget");
-    const imgWrap=document.querySelector("[data-img-wrap]");
-    const imgCloseBtn=document.querySelector("[data-img-close]");
-    const imgModalCard=document.getElementById("imgModalCard");
-
-    function openImgModal(src){
-      imgModalTarget.src=src;
-      imgModal.classList.remove("hidden");
-      document.body.classList.add("no-scroll");
-    }
-    function closeImgModal(){
-      imgModal.classList.add("hidden");
-      imgModalTarget.src="";
-      document.body.classList.remove("no-scroll");
-    }
-
-    document.querySelectorAll('img[data-lightbox="true"]').forEach(img=>{
-      img.addEventListener("click",()=>openImgModal(img.src));
-    });
-
-    imgWrap?.addEventListener("click",(e)=>{
-      const clickedInsideCard = imgModalCard?.contains(e.target);
-      const clickedOnClose = imgCloseBtn?.contains(e.target);
-      if(!clickedInsideCard && !clickedOnClose){
-        closeImgModal();
+    } catch (err) {
+      console.error(err);
+      if (window.Swal) {
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong",
+          text: "Please try again in a moment.",
+          confirmButtonColor: "#2E7D32",
+        });
+      } else {
+        alert("❌ Something went wrong. Please try again.");
       }
-    });
+    }
+  });
 
-    document.querySelector("[data-img-backdrop]")?.addEventListener("click", closeImgModal);
-    imgCloseBtn?.addEventListener("click", closeImgModal);
+  // -----------------------------
+  // Image lightbox
+  // -----------------------------
+  const imgModal = document.getElementById("imgModal");
+  const imgModalTarget = document.getElementById("imgModalTarget");
+  const imgWrap = document.querySelector("[data-img-wrap]");
+  const imgCloseBtn = document.querySelector("[data-img-close]");
+  const imgModalCard = document.getElementById("imgModalCard");
 
-    document.addEventListener("keydown",(e)=>{
-      if(e.key==="Escape" && !imgModal.classList.contains("hidden")) closeImgModal();
-    });
+  function openImgModal(src) {
+    imgModalTarget.src = src;
+    imgModal.classList.remove("hidden");
+    document.body.classList.add("no-scroll");
+  }
 
-    // -----------------------------
-    // NAVBAR hide on scroll down, show on scroll up
-    // -----------------------------
-    const navbar = document.getElementById("navbar");
-    let lastY = window.scrollY;
-    let ticking = false;
+  function closeImgModal() {
+    imgModal.classList.add("hidden");
+    imgModalTarget.src = "";
+    document.body.classList.remove("no-scroll");
+  }
 
-    function onScroll(){
-      const y = window.scrollY;
-      const delta = y - lastY;
+  document.querySelectorAll('img[data-lightbox="true"]').forEach((img) => {
+    img.addEventListener("click", () => openImgModal(img.src));
+  });
 
-      if(y < 20){
-        navbar?.classList.remove("nav-hidden");
-      } else if(delta > 6){
-        navbar?.classList.add("nav-hidden");
-      } else if(delta < -6){
-        navbar?.classList.remove("nav-hidden");
-      }
+  imgWrap?.addEventListener("click", (e) => {
+    const clickedInsideCard = imgModalCard?.contains(e.target);
+    const clickedOnClose = imgCloseBtn?.contains(e.target);
+    if (!clickedInsideCard && !clickedOnClose) {
+      closeImgModal();
+    }
+  });
 
-      lastY = y;
-      ticking = false;
+  document.querySelector("[data-img-backdrop]")?.addEventListener("click", closeImgModal);
+  imgCloseBtn?.addEventListener("click", closeImgModal);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !imgModal.classList.contains("hidden")) closeImgModal();
+  });
+
+  // -----------------------------
+  // NAVBAR hide on scroll down, show on scroll up
+  // -----------------------------
+  const navbar = document.getElementById("navbar");
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function onScroll() {
+    const y = window.scrollY;
+    const delta = y - lastY;
+
+    if (y < 20) {
+      navbar?.classList.remove("nav-hidden");
+    } else if (delta > 6) {
+      navbar?.classList.add("nav-hidden");
+    } else if (delta < -6) {
+      navbar?.classList.remove("nav-hidden");
     }
 
-    window.addEventListener("scroll", ()=>{
-      if(!ticking){
+    lastY = y;
+    ticking = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
         window.requestAnimationFrame(onScroll);
         ticking = true;
       }
-    }, { passive:true });
-  </script>
+    },
+    { passive: true }
+  );
+</script>
+
 
 </body>
 </html>
