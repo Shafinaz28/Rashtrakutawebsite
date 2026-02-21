@@ -62,7 +62,6 @@
     .hl-icon{width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 14px}
     .hl-card h4{font-size:15px;font-weight:600;margin-bottom:4px}
     .hl-card p{font-size:12px;color:rgba(255,255,255,.85)}
-
   </style>
 </head>
 
@@ -100,7 +99,6 @@
 
         <h1 class="mt-5 text-3xl sm:text-4xl md:text-6xl font-cinzel font-medium leading-[1.08]">
           Sandalwood Farm Plots
-          
         </h1>
 
         <p class="mt-4 text-base sm:text-lg text-white/80">
@@ -115,7 +113,6 @@
             Unlock Pre-Launch Price <i class="fa-solid fa-lock ml-2"></i>
           </button>
 
-          <!-- ✅ FIXED LINK -->
           <a href="#prelaunch"
             class="inline-flex items-center justify-center px-7 py-3.5 rounded-xl font-medium bg-white/10 text-green-300 border border-green-400/40 hover:bg-white/20 transition">
             Read Announcement <i class="fa-solid fa-scroll ml-2"></i>
@@ -263,7 +260,7 @@
         </div>
 
         <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15 flex gap-3">
-          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
+          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-content-center text-[#2E7D32]">
             <i class="fa-solid fa-scale-balanced"></i>
           </div>
           <div>
@@ -438,179 +435,161 @@
   </section>
 
   <!-- CONFIG -->
-<!-- =========================
-     CONFIGURATION (BG IMAGE)
-========================== -->
-<section id="config"
-  class="relative section-padding bg-center bg-no-repeat bg-cover"
-  style="background-image:url('./images/img2.jpg');">
+  <section id="config"
+    class="relative section-padding bg-center bg-no-repeat bg-cover"
+    style="background-image:url('./images/img2.jpg');">
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black/55"></div>
+    <div class="absolute inset-0 bg-black/55"></div>
 
-  <div class="container mx-auto px-4 relative z-10">
-    <div class="text-center">
-      <h2 class="text-3xl md:text-4xl font-cinzel font-medium text-white">Configuration</h2>
-      <p class="mt-2 text-white/80 text-sm">Click Unlock Price to open enquiry form.</p>
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="text-center">
+        <h2 class="text-3xl md:text-4xl font-cinzel font-medium text-white">Configuration</h2>
+        <p class="mt-2 text-white/80 text-sm">Click Unlock Price to open enquiry form.</p>
+      </div>
+
+      <div class="mt-10 max-w-4xl mx-auto paper bg-white/90 backdrop-blur rounded-2xl overflow-hidden shadow-soft">
+        <div class="grid grid-cols-3 bg-bg2 text-leaf2 text-sm font-medium">
+          <div class="py-4 px-5 text-center">Configuration</div>
+          <div class="py-4 px-5 text-center">Area</div>
+          <div class="py-4 px-5 text-center">Price</div>
+        </div>
+
+        <div class="grid grid-cols-3 border-t border-black/5 text-sm">
+          <div class="py-4 px-5 text-center text-t1">10 Guntas</div>
+          <div class="py-4 px-5 text-center text-t1">10,890 Sq.Ft</div>
+          <div class="py-4 px-5 text-center">
+            <button type="button" data-open-modal="leadModal" data-config="10 Guntas" data-area="10,890 Sq.Ft"
+              class="inline-flex items-center gap-2 text-leaf font-semibold hover:opacity-80 transition">
+              <i class="fa-solid fa-lock"></i> Unlock
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 border-t border-black/5 text-sm">
+          <div class="py-4 px-5 text-center text-t1">20 Guntas</div>
+          <div class="py-4 px-5 text-center text-t1">21,780 Sq.Ft</div>
+          <div class="py-4 px-5 text-center">
+            <button type="button" data-open-modal="leadModal" data-config="20 Guntas" data-area="21,780 Sq.Ft"
+              class="inline-flex items-center gap-2 text-leaf font-semibold hover:opacity-80 transition">
+              <i class="fa-solid fa-lock"></i> Unlock
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section id="benefit-cards" class="py-16 md:py-20 bg-bg1">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
+
+      <div class="text-center max-w-3xl mx-auto">
+        <h3 class="text-3xl md:text-4xl font-cinzel font-medium text-t0">
+          Investment & <span class="leaf-text">Lifestyle Benefits</span>
+        </h3>
+        <p class="mt-2 text-sm text-t2">
+          Five reasons why Chandanavana is built for long-term value.
+        </p>
+      </div>
+
+      <div class="mt-10 grid md:grid-cols-2 xl:grid-cols-5 gap-4">
+
+        <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="font-semibold text-[#1B5E20] text-sm">Land Appreciation</div>
+          </div>
+          <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
+            <li>Airport proximity</li>
+            <li>Infrastructure-led growth</li>
+            <li>Scarcity of green land</li>
+          </ul>
+          <div class="mt-3 text-xs italic text-[#2E7D32]">
+            Land near Bengaluru doesn’t wait — it moves only one way.
+          </div>
+        </div>
+
+        <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="font-semibold text-[#1B5E20] text-sm">Sandalwood – Green Gold</div>
+          </div>
+          <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
+            <li>High value globally</li>
+            <li>Ayurveda & perfumery demand</li>
+            <li>Limited supply</li>
+            <li>Value grows with maturity</li>
+          </ul>
+          <div class="mt-3 text-xs italic text-[#2E7D32]">Time itself becomes your ally.</div>
+        </div>
+
+        <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="font-semibold text-[#1B5E20] text-sm">Managed & Hassle-Free</div>
+          </div>
+          <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
+            <li>Scientific planting</li>
+            <li>Irrigation & maintenance</li>
+            <li>Health monitoring</li>
+            <li>Security & supervision</li>
+            <li>Regular updates</li>
+          </ul>
+          <div class="mt-3 text-xs italic text-[#2E7D32]">
+            Returns without daily involvement.
+          </div>
+        </div>
+
+        <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
+              <i class="fa-solid fa-house-circle-check"></i>
+            </div>
+            <div class="font-semibold text-[#1B5E20] text-sm">Farm Villa Retreat</div>
+          </div>
+          <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
+            <li>Weekend / holiday home</li>
+            <li>Clean air & silence</li>
+            <li>Personal retreat / legacy home</li>
+            <li>Investment + lifestyle</li>
+          </ul>
+          <div class="mt-3 text-xs italic text-[#2E7D32]">Your land welcomes you home.</div>
+        </div>
+
+        <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
+              <i class="fa-solid fa-coins"></i>
+            </div>
+            <div class="font-semibold text-[#1B5E20] text-sm">Dual Returns</div>
+          </div>
+          <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
+            <li>Land + timber value</li>
+            <li>Peace & pride of ownership</li>
+            <li>Generational legacy</li>
+          </ul>
+          <div class="mt-3 text-xs italic text-[#2E7D32]">
+            Slow, strong, sustainable wealth creation.
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="mt-10 max-w-4xl mx-auto paper bg-white/90 backdrop-blur rounded-2xl overflow-hidden shadow-soft">
-      <div class="grid grid-cols-3 bg-bg2 text-leaf2 text-sm font-medium">
-        <div class="py-4 px-5 text-center">Configuration</div>
-        <div class="py-4 px-5 text-center">Area</div>
-        <div class="py-4 px-5 text-center">Price</div>
-      </div>
-
-      <div class="grid grid-cols-3 border-t border-black/5 text-sm">
-        <div class="py-4 px-5 text-center text-t1">10 Guntas</div>
-        <div class="py-4 px-5 text-center text-t1">10,890 Sq.Ft</div>
-        <div class="py-4 px-5 text-center">
-          <button type="button" data-open-modal="leadModal" data-config="10 Guntas" data-area="10,890 Sq.Ft"
-            class="inline-flex items-center gap-2 text-leaf font-semibold hover:opacity-80 transition">
-            <i class="fa-solid fa-lock"></i> Unlock
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-3 border-t border-black/5 text-sm">
-        <div class="py-4 px-5 text-center text-t1">20 Guntas</div>
-        <div class="py-4 px-5 text-center text-t1">21,780 Sq.Ft</div>
-        <div class="py-4 px-5 text-center">
-          <button type="button" data-open-modal="leadModal" data-config="20 Guntas" data-area="21,780 Sq.Ft"
-            class="inline-flex items-center gap-2 text-leaf font-semibold hover:opacity-80 transition">
-            <i class="fa-solid fa-lock"></i> Unlock
-          </button>
-        </div>
-      </div>
-
+    <div class="mt-5 flex justify-center">
+      <button type="button" data-open-modal="leadModal"
+        class="inline-flex items-center justify-center px-7 py-3 rounded-xl font-medium bg-[#2E7D32] hover:bg-[#1B5E20] text-white shadow-glow transition">
+        Enquire Now <i class="fa-solid fa-arrow-right ml-2"></i>
+      </button>
     </div>
-  </div>
-</section>
-
-
-<!-- BENEFITS -->
-<section id="benefit-cards" class="py-16 md:py-20 bg-bg1">
-  <div class="w-full px-4 sm:px-6 lg:px-10">
-
-    <!-- Header -->
-    <div class="text-center max-w-3xl mx-auto">
-      <h3 class="text-3xl md:text-4xl font-cinzel font-medium text-t0">
-        Investment & <span class="leaf-text">Lifestyle Benefits</span>
-      </h3>
-      <p class="mt-2 text-sm text-t2">
-        Five reasons why Chandanavana is built for long-term value.
-      </p>
-
-     
-    </div>
-
-    <!-- Cards -->
-    <div class="mt-10 grid md:grid-cols-2 xl:grid-cols-5 gap-4">
-
-      <!-- CARD 1 -->
-      <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
-            <i class="fa-solid fa-chart-line"></i>
-          </div>
-          <div class="font-semibold text-[#1B5E20] text-sm">Land Appreciation</div>
-        </div>
-        <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
-          <li>Airport proximity</li>
-          <li>Infrastructure-led growth</li>
-          <li>Scarcity of green land</li>
-        </ul>
-        <div class="mt-3 text-xs italic text-[#2E7D32]">
-          Land near Bengaluru doesn’t wait — it moves only one way.
-        </div>
-      </div>
-
-      <!-- CARD 2 -->
-      <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
-            <i class="fa-solid fa-leaf"></i>
-          </div>
-          <div class="font-semibold text-[#1B5E20] text-sm">Sandalwood – Green Gold</div>
-        </div>
-        <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
-          <li>High value globally</li>
-          <li>Ayurveda & perfumery demand</li>
-          <li>Limited supply</li>
-          <li>Value grows with maturity</li>
-        </ul>
-        <div class="mt-3 text-xs italic text-[#2E7D32]">Time itself becomes your ally.</div>
-      </div>
-
-      <!-- CARD 3 -->
-      <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
-            <i class="fa-solid fa-shield-halved"></i>
-          </div>
-          <div class="font-semibold text-[#1B5E20] text-sm">Managed & Hassle-Free</div>
-        </div>
-        <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
-          <li>Scientific planting</li>
-          <li>Irrigation & maintenance</li>
-          <li>Health monitoring</li>
-          <li>Security & supervision</li>
-          <li>Regular updates</li>
-        </ul>
-        <div class="mt-3 text-xs italic text-[#2E7D32]">
-          Returns without daily involvement.
-        </div>
-      </div>
-
-      <!-- CARD 4 -->
-      <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
-            <i class="fa-solid fa-house-circle-check"></i>
-          </div>
-          <div class="font-semibold text-[#1B5E20] text-sm">Farm Villa Retreat</div>
-        </div>
-        <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
-          <li>Weekend / holiday home</li>
-          <li>Clean air & silence</li>
-          <li>Personal retreat / legacy home</li>
-          <li>Investment + lifestyle</li>
-        </ul>
-        <div class="mt-3 text-xs italic text-[#2E7D32]">Your land welcomes you home.</div>
-      </div>
-
-      <!-- CARD 5 -->
-      <div class="paper rounded-2xl p-5 shadow-soft border border-[#2E7D32]/15">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 rounded-full bg-[#2E7D32]/10 border border-[#2E7D32]/20 flex items-center justify-center text-[#2E7D32]">
-            <i class="fa-solid fa-coins"></i>
-          </div>
-          <div class="font-semibold text-[#1B5E20] text-sm">Dual Returns</div>
-        </div>
-        <ul class="mt-3 text-sm text-t1 list-disc pl-5 space-y-1">
-          <li>Land + timber value</li>
-          <li>Peace & pride of ownership</li>
-          <li>Generational legacy</li>
-        </ul>
-        <div class="mt-3 text-xs italic text-[#2E7D32]">
-          Slow, strong, sustainable wealth creation.
-        </div>
-      </div>
-
-    </div>
-  </div>
-  <div class="mt-5 flex justify-center">
-  <button
-    type="button"
-    data-open-modal="leadModal"
-    class="inline-flex items-center justify-center px-7 py-3 rounded-xl font-medium
-           bg-[#2E7D32] hover:bg-[#1B5E20] text-white shadow-glow transition">
-    Enquire Now <i class="fa-solid fa-arrow-right ml-2"></i>
-  </button>
-</div>
-
-</section>
-
+  </section>
 
   <!-- IDEAL FOR -->
   <section id="idealfor" class="py-16 md:py-20 bg-white">
@@ -633,6 +612,7 @@
       </div>
     </div>
   </section>
+
   <!-- HIGHLIGHTS -->
   <section id="highlights" class="py-20 bg-[#1B5E20]">
     <div class="container mx-auto px-4">
@@ -647,26 +627,13 @@
         <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-chess"></i></div><h4>Baalodyanam</h4><p>Children’s Nature Zone</p></div>
         <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-tree"></i></div><h4>Shantivanam</h4><p>Wellness Grove</p></div>
         <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-fire"></i></div><h4>Utsavagni</h4><p>Bonfire & Conversations</p></div>
-<div class="hl-card">
-  <div class="hl-icon">
-    <i class="fa-solid fa-masks-theater"></i>
-  </div>
-  <h4>Rangabhumi</h4>
-  <p>Amphitheatre Lawn</p>
-</div>
-        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-house-chimney"></i></div><h4> Gruham</h4><p>Earthen Farmhouses</p></div>
-
-<div class="hl-card">
-  <div class="hl-icon">
-    <i class="fa-solid fa-hands-praying"></i>
-  </div>
-  <h4>Dhyana Thirtha</h4>
-  <p>Yoga & Reflection Hall</p>
-</div>
-
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-masks-theater"></i></div><h4>Rangabhumi</h4><p>Amphitheatre Lawn</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-house-chimney"></i></div><h4>Gruham</h4><p>Earthen Farmhouses</p></div>
+        <div class="hl-card"><div class="hl-icon"><i class="fa-solid fa-hands-praying"></i></div><h4>Dhyana Thirtha</h4><p>Yoga & Reflection Hall</p></div>
       </div>
     </div>
   </section>
+
   <!-- GALLERY -->
   <section id="gallery" class="section-padding bg-white">
     <div class="container mx-auto px-4">
@@ -685,73 +652,58 @@
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img6.jpg"  alt="Gallery 6"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img8.jpg"  alt="Gallery 8"></div>
         <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img10.jpg" alt="Gallery 10"></div>
-                <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img11.jpg" alt="Gallery 10"></div>
-
+        <div class="img-card paper shadow-soft"><img data-lightbox="true" class="w-full h-48 object-cover imgfx" src="./images/img11.jpg" alt="Gallery 11"></div>
       </div>
     </div>
   </section>
 
+  <!-- PRE-LAUNCH ADVANTAGE -->
+  <section id="prelaunch-advantage"
+    class="relative py-16 md:py-24 bg-center bg-no-repeat bg-cover"
+    style="background-image: url('./images/img7.jpg');">
+    <div class="absolute inset-0 bg-black/55"></div>
 
-<!-- =========================
-     PRE-LAUNCH ADVANTAGE (BG IMAGE)
-========================== -->
-<section id="prelaunch-advantage"
-  class="relative py-16 md:py-24 bg-center bg-no-repeat bg-cover"
-  style="background-image: url('./images/img7.jpg');">
-
-  <!-- Dark Overlay -->
-  <div class="absolute inset-0 bg-black/55"></div>
-
-  <div class="relative z-10 w-full px-4 sm:px-6 lg:px-10">
-    <div class="paper bg-white/90 backdrop-blur rounded-2xl shadow-soft p-6 sm:p-8 md:p-10 max-w-5xl mx-auto">
-
-      <!-- Header -->
-      <div class="flex items-center gap-3">
-        <div class="w-12 h-12 rounded-full bg-[#2E7D32]/15 border border-[#2E7D32]/30 flex items-center justify-center text-[#2E7D32]">
-          <i class="fa-solid fa-rocket"></i>
+    <div class="relative z-10 w-full px-4 sm:px-6 lg:px-10">
+      <div class="paper bg-white/90 backdrop-blur rounded-2xl shadow-soft p-6 sm:p-8 md:p-10 max-w-5xl mx-auto">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-full bg-[#2E7D32]/15 border border-[#2E7D32]/30 flex items-center justify-center text-[#2E7D32]">
+            <i class="fa-solid fa-rocket"></i>
+          </div>
+          <h3 class="text-2xl md:text-4xl font-cinzel font-medium text-t0">
+            Pre-Launch Advantage
+          </h3>
         </div>
-        <h3 class="text-2xl md:text-4xl font-cinzel font-medium text-t0">
-          Pre-Launch Advantage
-        </h3>
+
+        <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
+            Priority plot selection
+          </div>
+          <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
+            Attractive pre-launch pricing
+          </div>
+          <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
+            Early-stage appreciation benefits
+          </div>
+        </div>
+
+        <div class="mt-6 text-sm italic text-[#2E7D32] text-center">
+          Once planted, forests only grow — entry prices grow with them.
+        </div>
+
+        <div class="mt-10 text-center">
+          <div class="text-lg md:text-2xl font-cinzel text-[#1B5E20]">
+            Where Sandalwood Grows. Where Wealth Lives. Where Legacy Begins.
+          </div>
+
+          <button type="button" data-open-modal="leadModal"
+            class="mt-6 inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-medium bg-[#2E7D32] hover:bg-[#1B5E20] text-white shadow-glow transition">
+            Enquire for Pre-Launch
+            <i class="fa-solid fa-arrow-right ml-2"></i>
+          </button>
+        </div>
       </div>
-
-      <!-- Benefits -->
-      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
-          Priority plot selection
-        </div>
-        <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
-          Attractive pre-launch pricing
-        </div>
-        <div class="bg-white rounded-xl border border-[#2E7D32]/20 p-5 text-sm text-t1">
-          Early-stage appreciation benefits
-        </div>
-      </div>
-
-      <!-- Quote -->
-      <div class="mt-6 text-sm italic text-[#2E7D32] text-center">
-        Once planted, forests only grow — entry prices grow with them.
-      </div>
-
-      <!-- CTA -->
-      <div class="mt-10 text-center">
-        <div class="text-lg md:text-2xl font-cinzel text-[#1B5E20]">
-          Where Sandalwood Grows. Where Wealth Lives. Where Legacy Begins.
-        </div>
-
-        <button
-          type="button"
-          data-open-modal="leadModal"
-          class="mt-6 inline-flex items-center justify-center px-8 py-3.5 rounded-xl font-medium bg-[#2E7D32] hover:bg-[#1B5E20] text-white shadow-glow transition">
-          Enquire for Pre-Launch
-          <i class="fa-solid fa-arrow-right ml-2"></i>
-        </button>
-      </div>
-
     </div>
-  </div>
-</section>
-
+  </section>
 
   <section id="developer" class="section-padding bg-bg1">
     <div class="container mx-auto px-4">
@@ -778,7 +730,6 @@
       </div>
     </div>
   </section>
-
 
   <!-- CONTACT -->
   <section id="contact" class="py-16 bg-[#F6FFF7]">
@@ -850,10 +801,9 @@
           <h3 class="text-xl font-semibold text-[#1B5E20]">Enquiry Form</h3>
           <p class="mt-2 text-sm text-t2">Fill this once — we’ll share price, documents and visit options.</p>
 
-          <!-- ✅ Contact form (kept same) -->
+          <!-- ✅ Contact form -->
           <form id="contactForm" class="mt-6 space-y-4">
-            <input type="hidden" name="page" id="pageField" />
-            <input type="hidden" name="source" value="Contact Section Form" />
+            <input type="hidden" name="source" value=" Chandanavana Contact Form" />
 
             <div>
               <label class="text-xs text-[#355E3B]">Name</label>
@@ -915,19 +865,18 @@
   </section>
 
   <footer class="bg-white">
-  <div class="container mx-auto px-4">
-    <div class="border-t border-black/10 mt-8 pt-6 pb-8 text-center">
-      <p class="text-t2 font-inter text-sm">
-        © 2026 Rastrakuta Infra Developers Pvt Ltd. All rights reserved.
-        <span class="mx-2 text-black/20">|</span>
-        <a href="" class="text-[#2E7D32] hover:text-[#1B5E20] hover:underline transition">
-          Privacy Policy
-        </a>
-      </p>
+    <div class="container mx-auto px-4">
+      <div class="border-t border-black/10 mt-8 pt-6 pb-8 text-center">
+        <p class="text-t2 font-inter text-sm">
+          © 2026 Rastrakuta Infra Developers Pvt Ltd. All rights reserved.
+          <span class="mx-2 text-black/20">|</span>
+          <a href="" class="text-[#2E7D32] hover:text-[#1B5E20] hover:underline transition">
+            Privacy Policy
+          </a>
+        </p>
+      </div>
     </div>
-  </div>
-</footer>
-
+  </footer>
 
   <!-- POPUP LEAD MODAL -->
   <div id="leadModal" class="hidden fixed inset-0 z-[99]">
@@ -948,9 +897,10 @@
           <div class="p-4">
             <!-- ✅ Lead form (Modal) -->
             <form id="leadForm" class="space-y-3">
-              <input type="hidden" name="configuration" id="cfgField" />
-              <input type="hidden" name="area" id="areaField" />
+              <!-- optional hidden fields for UI tracking -->
               <input type="hidden" name="source" value="Unlock Modal Form" />
+              <input type="hidden" name="config" id="cfgField" value="" />
+              <input type="hidden" name="area" id="areaField" value="" />
 
               <div>
                 <label class="text-[11px] text-[#355E3B]">Name</label>
@@ -1034,11 +984,7 @@
     </a>
 
     <a href="tel:9886990006"
-      class="w-11 h-11 flex items-center justify-center rounded-full
-             bg-bg1 hover:bg-leaf
-             text-leaf hover:text-white
-             border border-leaf/30
-             shadow-lg hover:scale-105 transition"
+      class="w-11 h-11 flex items-center justify-center rounded-full bg-bg1 hover:bg-leaf text-leaf hover:text-white border border-leaf/30 shadow-lg hover:scale-105 transition"
       aria-label="Call Now">
       <i class="fa-solid fa-phone text-sm"></i>
     </a>
@@ -1068,21 +1014,19 @@
     );
   });
 
-  // Set config/area (UI only; not sent)
+  // Set config/area (UI only; not required by sheet, but useful for CRM if you enable it later)
   const cfgField = document.getElementById("cfgField");
   const areaField = document.getElementById("areaField");
 
-  document
-    .querySelectorAll('[data-open-modal="leadModal"]')
-    .forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const cfg = btn.getAttribute("data-config") || "";
-        const area = btn.getAttribute("data-area") || "";
-        if (cfgField) cfgField.value = cfg;
-        if (areaField) areaField.value = area;
-        openModal("leadModal");
-      });
+  document.querySelectorAll('[data-open-modal="leadModal"]').forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cfg = btn.getAttribute("data-config") || "";
+      const area = btn.getAttribute("data-area") || "";
+      if (cfgField) cfgField.value = cfg;
+      if (areaField) areaField.value = area;
+      openModal("leadModal");
     });
+  });
 
   // Close lead modal on ESC
   document.addEventListener("keydown", (e) => {
@@ -1090,7 +1034,7 @@
   });
 
   // -----------------------------
-  // ✅ SweetAlert Loading (Submitting...)
+  // SweetAlert Loading
   // -----------------------------
   function showSubmitting() {
     if (!window.Swal) return;
@@ -1099,36 +1043,47 @@
       text: "Please wait while we save your details",
       allowOutsideClick: false,
       allowEscapeKey: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
+      didOpen: () => Swal.showLoading(),
     });
   }
 
   // -----------------------------
-  // ✅ Google Sheet Web App URL (same for BOTH forms)
+  // ✅ Google Sheet Web App URL
   // -----------------------------
   const SHEET_WEBAPP_URL =
-"https://script.google.com/macros/s/AKfycbwOLM8WdbKStphMIQqOZvf0NhPDr-sKOVF6cRncGQTNrFD1AT3vpjpwCB22B9Zhhp4K/exec"
-  // ✅ SEND ONLY 4 FIELDS: name, phone, email, message
-  // (timestamp generated inside Apps Script)
-  async function postToSheet(formEl) {
-    const fd = new FormData();
-    fd.append("name", (formEl.querySelector('[name="name"]')?.value || "").trim());
-    fd.append("phone", (formEl.querySelector('[name="phone"]')?.value || "").trim());
-    fd.append("email", (formEl.querySelector('[name="email"]')?.value || "").trim());
-    fd.append("message", (formEl.querySelector('[name="message"]')?.value || "").trim());
+"https://script.google.com/macros/s/AKfycbwUbVinsa-z6arWry-8wa63Rby1-lmFc3zOwB9t7JunvgOFQvveV7xktP-IyllNDC3E/exec"
+  // -----------------------------
+  // ✅ FETCH REQUEST (no iframe) - sends JSON
+  // NOTE:
+  // 1) Your Apps Script must support JSON body: doPost(e) parsing e.postData.contents
+  // 2) Use mode:"cors" so you can read response. If your webapp doesn't send CORS headers,
+  //    switch to mode:"no-cors" (but then you can't read response).
+  // -----------------------------
 
-    // no-cors works for static hosting
-    await fetch(SHEET_WEBAPP_URL, {
-      method: "POST",
-      body: fd,
-      mode: "no-cors",
-    });
-  }
+async function postToSheet(formEl) {
+  const payload = {
+    name: (formEl.querySelector('[name="name"]')?.value || "").trim(),
+    phone: (formEl.querySelector('[name="phone"]')?.value || "").trim(),
+    email: (formEl.querySelector('[name="email"]')?.value || "").trim(),
+    message: (formEl.querySelector('[name="message"]')?.value || "").trim(),
+    source: (formEl.querySelector('[name="source"]')?.value || "").trim(),
+  };
+
+  // ✅ no-cors => request goes through on static hosting
+  await fetch(SHEET_WEBAPP_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    mode: "no-cors",
+  });
+
+  // ✅ If fetch didn't throw, assume success (can't read response in no-cors)
+  return true;
+}
+
 
   // -----------------------------
-  // ✅ Lead form submit (Modal)
+  // Lead form submit (Modal)
   // -----------------------------
   const leadForm = document.getElementById("leadForm");
   leadForm?.addEventListener("submit", async function (e) {
@@ -1168,7 +1123,7 @@
   });
 
   // -----------------------------
-  // ✅ Contact form submit (Contact section)
+  // Contact form submit (Contact section)
   // -----------------------------
   const contactForm = document.getElementById("contactForm");
   contactForm?.addEventListener("submit", async function (e) {
@@ -1234,9 +1189,7 @@
   imgWrap?.addEventListener("click", (e) => {
     const clickedInsideCard = imgModalCard?.contains(e.target);
     const clickedOnClose = imgCloseBtn?.contains(e.target);
-    if (!clickedInsideCard && !clickedOnClose) {
-      closeImgModal();
-    }
+    if (!clickedInsideCard && !clickedOnClose) closeImgModal();
   });
 
   document.querySelector("[data-img-backdrop]")?.addEventListener("click", closeImgModal);
@@ -1280,7 +1233,6 @@
     { passive: true }
   );
 </script>
-
 
 </body>
 </html>

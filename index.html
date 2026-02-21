@@ -40,7 +40,6 @@
     * { margin: 0; padding: 0; box-sizing: border-box }
     html { scroll-behavior: smooth }
 
-    /* ✅ FIX: shimmer keyframes must exist (your CSS uses animation: shimmer) */
     @keyframes shimmer {
       0% { transform: translateX(-40%) skewX(-18deg); }
       100% { transform: translateX(140%) skewX(-18deg); }
@@ -723,9 +722,11 @@
               <h3 class="text-xl font-playfair font-medium text-t0">Enquiry Form</h3>
               <p class="text-t2 mt-2 text-sm">We’ll call you back within 24 hours.</p>
 
-              <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+              <!-- ✅ Fetch-based form (no redirect, no iframe) -->
+              <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm" novalidate>
+                <!-- ✅ store source (same sheet) -->
+                <input type="hidden" name="source_page" id="sourceField" value="rastrakuta home page" />
 
-              <form class="mt-6 space-y-4 flex-1 flex flex-col" id="leadForm" target="hidden_iframe">
                 <div>
                   <label class="text-t2 text-sm">Full Name</label>
                   <input type="text" id="fullName" name="name" required
@@ -753,11 +754,11 @@
                   <label class="text-t2 text-sm">Requirement</label>
                   <select id="requirements" name="message"
                     class="mt-1 w-full bg-bg2/60 border border-white/10 focus:border-gold/50 outline-none text-t0 rounded-xl px-4 py-3 text-sm">
-                    <option>Villa Plot</option>
-                    <option>Residential Layout Plot</option>
-                    <option>Farm Plot</option>
-                    <option>Investment Options</option>
-                    <option>Site Visit</option>
+                    <option value="Villa Plot">Villa Plot</option>
+                    <option value="Residential Layout Plot">Residential Layout Plot</option>
+                    <option value="Farm Plot">Farm Plot</option>
+                    <option value="Investment Options">Investment Options</option>
+                    <option value="Site Visit">Site Visit</option>
                   </select>
                 </div>
 
@@ -882,243 +883,232 @@
   </div>
 
   <!-- ONE SINGLE SCRIPT -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
 
-    /* ===============================
-       SMOOTH SCROLL (nav links)
-    =============================== */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener("click", function (e) {
-        const href = this.getAttribute("href");
-        if (!href || href === "#") return;
+      /* ===============================
+         SMOOTH SCROLL (nav links)
+      =============================== */
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (!href || href === "#") return;
 
-        const target = document.querySelector(href);
-        if (!target) return;
+          const target = document.querySelector(href);
+          if (!target) return;
 
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
       });
-    });
 
-    /* ===============================
-       NAVBAR SCROLL EFFECT
-    =============================== */
-    const navbar = document.getElementById("navbar");
-    function setNav() {
-      if (!navbar) return;
+      /* ===============================
+         NAVBAR SCROLL EFFECT
+      =============================== */
+      const navbar = document.getElementById("navbar");
+      function setNav() {
+        if (!navbar) return;
 
-      if (window.scrollY > 30) {
-        navbar.classList.add("glass-dark", "backdrop-blur-xl");
-        navbar.style.background = "rgba(7,10,15,0.78)";
-        navbar.style.borderBottom = "1px solid rgba(255,255,255,0.08)";
-      } else {
-        navbar.classList.remove("glass-dark", "backdrop-blur-xl");
-        navbar.style.background = "transparent";
-        navbar.style.borderBottom = "1px solid transparent";
+        if (window.scrollY > 30) {
+          navbar.classList.add("glass-dark", "backdrop-blur-xl");
+          navbar.style.background = "rgba(7,10,15,0.78)";
+          navbar.style.borderBottom = "1px solid rgba(255,255,255,0.08)";
+        } else {
+          navbar.classList.remove("glass-dark", "backdrop-blur-xl");
+          navbar.style.background = "transparent";
+          navbar.style.borderBottom = "1px solid transparent";
+        }
       }
-    }
-    window.addEventListener("scroll", setNav);
-    setNav();
+      window.addEventListener("scroll", setNav);
+      setNav();
 
-    /* ===============================
-       MOBILE MENU
-    =============================== */
-    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const backdrop = document.getElementById("menu-backdrop");
+      /* ===============================
+         MOBILE MENU
+      =============================== */
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const backdrop = document.getElementById("menu-backdrop");
 
-    function openMenu() {
-      if (!mobileMenu) return;
-      mobileMenu.classList.remove("hidden");
-      document.body.style.overflow = "hidden";
-    }
-    function closeMenu() {
-      if (!mobileMenu) return;
-      mobileMenu.classList.add("hidden");
-      document.body.style.overflow = "";
-    }
+      function openMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+      function closeMenu() {
+        if (!mobileMenu) return;
+        mobileMenu.classList.add("hidden");
+        document.body.style.overflow = "";
+      }
 
-    mobileMenuBtn?.addEventListener("click", () => {
-      mobileMenu.classList.contains("hidden") ? openMenu() : closeMenu();
-    });
-
-    backdrop?.addEventListener("click", closeMenu);
-    document.querySelectorAll(".mobile-link").forEach(link =>
-      link.addEventListener("click", closeMenu)
-    );
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") closeMenu();
-    });
-
-    /* ===============================
-       ANIMATE ON SCROLL
-    =============================== */
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("animate");
+      mobileMenuBtn?.addEventListener("click", () => {
+        mobileMenu.classList.contains("hidden") ? openMenu() : closeMenu();
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -50px 0px" });
 
-    document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+      backdrop?.addEventListener("click", closeMenu);
+      document.querySelectorAll(".mobile-link").forEach(link =>
+        link.addEventListener("click", closeMenu)
+      );
 
-    /* ===============================
-       TESTIMONIAL SLIDER + AUTOPLAY (NO PAGE JUMP)
-       ✅ Scroll ONLY inside track (no scrollIntoView)
-       ✅ Autoplay only when testimonials section is visible
-    =============================== */
-    const testiSection = document.getElementById("testimonials");
-    const track = document.getElementById("testiTrack");
-    const prevBtn = document.getElementById("testiPrev");
-    const nextBtn = document.getElementById("testiNext");
-    const dotsWrap = document.getElementById("testiDots");
+      document.addEventListener("keydown", e => {
+        if (e.key === "Escape") closeMenu();
+      });
 
-    if (testiSection && track && dotsWrap) {
-      const slides = Array.from(track.children);
-      let activeIndex = 0;
+      /* ===============================
+         ANIMATE ON SCROLL
+      =============================== */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("animate");
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -50px 0px" });
 
-      // Dots
-      dotsWrap.innerHTML = "";
-      slides.forEach((_, i) => {
-        const dot = document.createElement("button");
-        dot.type = "button";
-        dot.setAttribute("aria-label", `Go to testimonial ${i + 1}`);
-        dot.className =
-          "w-2.5 h-2.5 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 transition";
-        dot.addEventListener("click", () => {
+      document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
+
+      /* ===============================
+         TESTIMONIAL SLIDER + AUTOPLAY
+      =============================== */
+      const testiSection = document.getElementById("testimonials");
+      const track = document.getElementById("testiTrack");
+      const prevBtn = document.getElementById("testiPrev");
+      const nextBtn = document.getElementById("testiNext");
+      const dotsWrap = document.getElementById("testiDots");
+
+      if (testiSection && track && dotsWrap) {
+        const slides = Array.from(track.children);
+        let activeIndex = 0;
+
+        dotsWrap.innerHTML = "";
+        slides.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.setAttribute("aria-label", `Go to testimonial ${i + 1}`);
+          dot.className =
+            "w-2.5 h-2.5 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 transition";
+          dot.addEventListener("click", () => {
+            stopAuto();
+            scrollToIndex(i);
+            startAutoIfVisible();
+          });
+          dotsWrap.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsWrap.children);
+
+        function setActiveDot(i) {
+          dots.forEach((d, idx) => {
+            d.classList.toggle("bg-gold", idx === i);
+            d.classList.toggle("border-gold/40", idx === i);
+            d.classList.toggle("bg-white/10", idx !== i);
+            d.classList.toggle("border-white/20", idx !== i);
+          });
+        }
+
+        function scrollToIndex(i) {
+          const el = slides[i];
+          if (!el) return;
+
+          track.scrollTo({
+            left: el.offsetLeft,
+            behavior: "smooth"
+          });
+
+          activeIndex = i;
+          setActiveDot(activeIndex);
+        }
+
+        function nearestIndex() {
+          const left = track.scrollLeft;
+          let best = 0;
+          let bestDist = Infinity;
+
+          slides.forEach((el, i) => {
+            const dist = Math.abs(el.offsetLeft - left);
+            if (dist < bestDist) {
+              bestDist = dist;
+              best = i;
+            }
+          });
+
+          return best;
+        }
+
+        prevBtn?.addEventListener("click", () => {
           stopAuto();
+          const i = Math.max(0, nearestIndex() - 1);
           scrollToIndex(i);
           startAutoIfVisible();
         });
-        dotsWrap.appendChild(dot);
-      });
 
-      const dots = Array.from(dotsWrap.children);
-
-      function setActiveDot(i) {
-        dots.forEach((d, idx) => {
-          d.classList.toggle("bg-gold", idx === i);
-          d.classList.toggle("border-gold/40", idx === i);
-          d.classList.toggle("bg-white/10", idx !== i);
-          d.classList.toggle("border-white/20", idx !== i);
-        });
-      }
-
-      // ✅ IMPORTANT: this prevents page jump
-      function scrollToIndex(i) {
-        const el = slides[i];
-        if (!el) return;
-
-        track.scrollTo({
-          left: el.offsetLeft,
-          behavior: "smooth"
+        nextBtn?.addEventListener("click", () => {
+          stopAuto();
+          const i = Math.min(slides.length - 1, nearestIndex() + 1);
+          scrollToIndex(i);
+          startAutoIfVisible();
         });
 
-        activeIndex = i;
-        setActiveDot(activeIndex);
-      }
-
-      function nearestIndex() {
-        const left = track.scrollLeft;
-        let best = 0;
-        let bestDist = Infinity;
-
-        slides.forEach((el, i) => {
-          const dist = Math.abs(el.offsetLeft - left);
-          if (dist < bestDist) {
-            bestDist = dist;
-            best = i;
-          }
+        let t = null;
+        track.addEventListener("scroll", () => {
+          clearTimeout(t);
+          t = setTimeout(() => {
+            activeIndex = nearestIndex();
+            setActiveDot(activeIndex);
+          }, 80);
         });
 
-        return best;
+        setActiveDot(0);
+
+        let autoTimer = null;
+        const AUTO_DELAY = 3500;
+        let sectionVisible = false;
+
+        function startAuto() {
+          stopAuto();
+          autoTimer = setInterval(() => {
+            const next = (activeIndex + 1) % slides.length;
+            scrollToIndex(next);
+          }, AUTO_DELAY);
+        }
+
+        function stopAuto() {
+          if (autoTimer) clearInterval(autoTimer);
+          autoTimer = null;
+        }
+
+        function startAutoIfVisible() {
+          if (sectionVisible) startAuto();
+        }
+
+        track.addEventListener("mouseenter", stopAuto);
+        track.addEventListener("mouseleave", startAutoIfVisible);
+        track.addEventListener("touchstart", stopAuto, { passive: true });
+        track.addEventListener("touchend", startAutoIfVisible, { passive: true });
+
+        const visObserver = new IntersectionObserver((entries) => {
+          const entry = entries[0];
+          sectionVisible = !!entry?.isIntersecting;
+
+          if (sectionVisible) startAuto();
+          else stopAuto();
+        }, { threshold: 0.25 });
+
+        visObserver.observe(testiSection);
       }
 
-      prevBtn?.addEventListener("click", () => {
-        stopAuto();
-        const i = Math.max(0, nearestIndex() - 1);
-        scrollToIndex(i);
-        startAutoIfVisible();
-      });
+      /* ===============================
+         LEAD FORM – FETCH (NO REDIRECT)
+         IMPORTANT:
+         ✅ Apps Script Web App must allow CORS.
+         If your GAS doesn't set CORS headers, fetch will fail.
+      =============================== */
+      const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwUbVinsa-z6arWry-8wa63Rby1-lmFc3zOwB9t7JunvgOFQvveV7xktP-IyllNDC3E/exec"
 
-      nextBtn?.addEventListener("click", () => {
-        stopAuto();
-        const i = Math.min(slides.length - 1, nearestIndex() + 1);
-        scrollToIndex(i);
-        startAutoIfVisible();
-      });
-
-      let t = null;
-      track.addEventListener("scroll", () => {
-        clearTimeout(t);
-        t = setTimeout(() => {
-          activeIndex = nearestIndex();
-          setActiveDot(activeIndex);
-        }, 80);
-      });
-
-      setActiveDot(0);
-
-      // Autoplay (only when section visible)
-      let autoTimer = null;
-      const AUTO_DELAY = 3500;
-      let sectionVisible = false;
-
-      function startAuto() {
-        stopAuto();
-        autoTimer = setInterval(() => {
-          const next = (activeIndex + 1) % slides.length;
-          scrollToIndex(next);
-        }, AUTO_DELAY);
-      }
-
-      function stopAuto() {
-        if (autoTimer) clearInterval(autoTimer);
-        autoTimer = null;
-      }
-
-      function startAutoIfVisible() {
-        if (sectionVisible) startAuto();
-      }
-
-      // Pause on hover/touch
-      track.addEventListener("mouseenter", stopAuto);
-      track.addEventListener("mouseleave", startAutoIfVisible);
-      track.addEventListener("touchstart", stopAuto, { passive: true });
-      track.addEventListener("touchend", startAutoIfVisible, { passive: true });
-
-      // ✅ Observe section visibility to avoid autoplay affecting other sections
-      const visObserver = new IntersectionObserver((entries) => {
-        const entry = entries[0];
-        sectionVisible = !!entry?.isIntersecting;
-
-        if (sectionVisible) startAuto();
-        else stopAuto();
-      }, { threshold: 0.25 });
-
-      visObserver.observe(testiSection);
-    }
-
-    /* ===============================
-       LEAD FORM – GOOGLE APPS SCRIPT
-    =============================== */
-    const GOOGLE_SCRIPT_URL =
-"https://script.google.com/macros/s/AKfycbwOLM8WdbKStphMIQqOZvf0NhPDr-sKOVF6cRncGQTNrFD1AT3vpjpwCB22B9Zhhp4K/exec"
-    const form = document.getElementById("leadForm");
-    const iframe = document.getElementById("hidden_iframe");
-    const submitBtn = document.getElementById("submitBtn");
-    const btnText = document.getElementById("btnText");
-    const btnIcon = document.getElementById("btnIcon");
-    const btnSpinner = document.getElementById("btnSpinner");
-
-    if (form && iframe) {
-      form.action = GOOGLE_SCRIPT_URL;
-      form.method = "POST";
-      form.target = "hidden_iframe";
-
-      let isSubmitting = false;
-      let fallbackTimer = null;
+      const form = document.getElementById("leadForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const btnText = document.getElementById("btnText");
+      const btnIcon = document.getElementById("btnIcon");
+      const btnSpinner = document.getElementById("btnSpinner");
+      const sourceField = document.getElementById("sourceField");
 
       function setLoading(on) {
         if (!submitBtn) return;
@@ -1129,53 +1119,40 @@
       }
 
       function fireSuccess() {
-        if (window.Swal) {
-          Swal.fire({
-            icon: "success",
-            title: "Enquiry Sent!",
-            text: "We’ll call you back within 24 hours.",
-            confirmButtonColor: "#B8860B",
-          });
-        } else {
-          alert("Enquiry Sent! We’ll call you back within 24 hours.");
+        Swal.fire({
+          icon: "success",
+          title: "Enquiry Sent!",
+          text: "We’ll call you back within 24 hours.",
+          confirmButtonColor: "#B8860B",
+        });
+      }
+
+      function fireError(msg) {
+        Swal.fire({
+          icon: "error",
+          title: "Submission Failed",
+          text: msg || "Network issue. Please try again or call us directly.",
+          confirmButtonColor: "#B8860B",
+        });
+      }
+
+      if (form) {
+        // ✅ Set dynamic source (optional): current page path
+        // If you want fixed source, keep "rastrakuta home page".
+        if (sourceField) {
+          sourceField.value = "rastrakuta home page ";
+          // OR: sourceField.value = window.location.pathname || "rastrakuta home page ";
         }
-      }
 
-      function fireError() {
-        if (window.Swal) {
-          Swal.fire({
-            icon: "error",
-            title: "Submission Failed",
-            text: "Network issue. Please try again or call us directly.",
-            confirmButtonColor: "#B8860B",
-          });
-        } else {
-          alert("Submission Failed. Please try again.");
-        }
-      }
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-      function onLoad() {
-        if (!isSubmitting) return;
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
 
-        clearTimeout(fallbackTimer);
-        isSubmitting = false;
-        setLoading(false);
-
-        if (window.Swal && Swal.isVisible()) Swal.close();
-        form.reset();
-        fireSuccess();
-      }
-
-      iframe.addEventListener("load", onLoad);
-
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (isSubmitting) return;
-
-        isSubmitting = true;
-        setLoading(true);
-
-        if (window.Swal) {
+          setLoading(true);
           Swal.fire({
             title: "Submitting...",
             text: "Please wait",
@@ -1183,60 +1160,72 @@
             allowEscapeKey: false,
             didOpen: () => Swal.showLoading(),
           });
-        }
 
-        form.submit();
+          try {
+            // send as x-www-form-urlencoded (same as normal form submit)
+            const fd = new FormData(form);
+            const body = new URLSearchParams();
+            fd.forEach((v, k) => body.append(k, String(v)));
 
-        fallbackTimer = setTimeout(() => {
-          if (!isSubmitting) return;
+            const res = await fetch(GOOGLE_SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors", // ✅ avoids CORS blocking, but response is opaque
+              headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+              body: body.toString(),
+            });
 
-          iframe.removeEventListener("load", onLoad);
-          if (window.Swal && Swal.isVisible()) Swal.close();
+            // With no-cors you can't read JSON, assume success if fetch doesn't throw
+            if (Swal.isVisible()) Swal.close();
+            form.reset();
+            // restore source after reset
+            if (sourceField) sourceField.value = "Contact Form";
+            setLoading(false);
+            fireSuccess();
 
-          fireError();
-          setLoading(false);
-          isSubmitting = false;
+          } catch (err) {
+            if (Swal.isVisible()) Swal.close();
+            setLoading(false);
+            fireError("Could not submit. Please check internet and try again.");
+            console.error(err);
+          }
+        });
+      }
 
-          iframe.addEventListener("load", onLoad);
-        }, 15000);
+      /* ===============================
+         SCROLL PROGRESS BAR
+      =============================== */
+      const scrollBar = document.createElement("div");
+      scrollBar.className = "fixed top-0 left-0 h-[2px] bg-gold z-50";
+      scrollBar.style.width = "0%";
+      scrollBar.style.opacity = "0";
+      document.body.appendChild(scrollBar);
+
+      window.addEventListener("scroll", () => {
+        const percent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        scrollBar.style.width = percent + "%";
+        scrollBar.style.opacity = window.scrollY > 40 ? "1" : "0";
       });
-    }
 
-    /* ===============================
-       SCROLL PROGRESS BAR
-    =============================== */
-    const scrollBar = document.createElement("div");
-    scrollBar.className = "fixed top-0 left-0 h-[2px] bg-gold z-50";
-    scrollBar.style.width = "0%";
-    scrollBar.style.opacity = "0";
-    document.body.appendChild(scrollBar);
+      /* ===============================
+         BACK TO TOP
+      =============================== */
+      const backToTop = document.createElement("button");
+      backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+      backToTop.className =
+        "fixed bottom-8 right-20 bg-gold hover:bg-gold2 text-ink w-11 h-11 rounded-full shadow-glow opacity-0 translate-y-8 transition z-50";
+      document.body.appendChild(backToTop);
 
-    window.addEventListener("scroll", () => {
-      const percent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-      scrollBar.style.width = percent + "%";
-      scrollBar.style.opacity = window.scrollY > 40 ? "1" : "0";
+      window.addEventListener("scroll", () => {
+        backToTop.style.opacity = window.scrollY > 320 ? "1" : "0";
+        backToTop.style.transform = window.scrollY > 320 ? "translateY(0)" : "translateY(2rem)";
+      });
+
+      backToTop.addEventListener("click", () =>
+        window.scrollTo({ top: 0, behavior: "smooth" })
+      );
+
     });
-
-    /* ===============================
-       BACK TO TOP
-    =============================== */
-    const backToTop = document.createElement("button");
-    backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTop.className =
-      "fixed bottom-8 right-20 bg-gold hover:bg-gold2 text-ink w-11 h-11 rounded-full shadow-glow opacity-0 translate-y-8 transition z-50";
-    document.body.appendChild(backToTop);
-
-    window.addEventListener("scroll", () => {
-      backToTop.style.opacity = window.scrollY > 320 ? "1" : "0";
-      backToTop.style.transform = window.scrollY > 320 ? "translateY(0)" : "translateY(2rem)";
-    });
-
-    backToTop.addEventListener("click", () =>
-      window.scrollTo({ top: 0, behavior: "smooth" })
-    );
-
-  });
-</script>
+  </script>
 
 </body>
 </html>
